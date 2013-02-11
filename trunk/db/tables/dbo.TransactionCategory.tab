@@ -1,0 +1,36 @@
+create table [dbo].[TRANSACTION_CATEGORY]
+(
+	TRANSACTION_ID bigint not null,
+	CATEGORY_ID bigint not null
+)
+go
+
+alter table [dbo].[TRANSACTION_CATEGORY]
+	add constraint PK_TRANSACTION_CATEGORY primary key nonclustered
+	(
+		TRANSACTION_ID,
+		CATEGORY_ID
+	)
+go
+
+alter table [dbo].[TRANSACTION_CATEGORY]
+	add constraint FK_TRANSACTION_CATEGORY_TRANSACTION foreign key
+	(
+		TRANSACTION_ID
+	)
+	references [dbo].[TRANSACTION]
+	(
+		TRANSACTION_ID
+	)
+go
+
+alter table [dbo].[TRANSACTION_CATEGORY]
+	add constraint FK_TRANSACTION_CATEGORY_CATEGORY foreign key
+	(
+		CATEGORY_ID
+	)
+	references [dbo].[CATEGORY]
+	(
+		CATEGORY_ID
+	)
+go

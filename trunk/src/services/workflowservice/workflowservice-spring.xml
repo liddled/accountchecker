@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<objects xmlns="http://www.springframework.net"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd">
+
+  <description>Definition of objects to be registered via Spring.</description>
+
+  <object name="appConfigPropertyHolder" type="Spring.Objects.Factory.Config.PropertyPlaceholderConfigurer, Spring.Core">
+    <property name="configSections" value="appSettings" />
+  </object>
+
+  <import resource="SpringXml\cache.xml" />
+  <import resource="SpringXml\db.xml" />
+  <import resource="SpringXml\messaging.xml" />
+
+  <import resource="SpringXml\account.xml" />
+  <import resource="SpringXml\budget.xml" />
+  <import resource="SpringXml\category.xml" />
+  <import resource="SpringXml\framework.xml" />
+  <import resource="SpringXml\transaction.xml" />
+
+</objects>

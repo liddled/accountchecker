@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A8090526-4E6F-421E-B389-0D17D3F084D8}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DL.AccountChecker.Suite.Web</RootNamespace>
+    <AssemblyName>DL.AccountChecker.Suite.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\..\dependencies\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net">
+      <HintPath>..\..\..\dependencies\Common.Logging.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\dependencies\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\solutions\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\..\dependencies\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <HintPath>..\..\..\dependencies\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extensions\ViewExtensions.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ModelBinders\AccountModelBinder.cs" />
+    <Compile Include="ModelBinders\CategoryModelBinder.cs" />
+    <Compile Include="ModelBinders\CategoryListModelBinder.cs" />
+    <Compile Include="ModelBinders\TransactionModelBinder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subscription\SubscriptionController.cs" />
+    <Compile Include="ViewModels\AccountIndexViewModel.cs" />
+    <Compile Include="ViewModels\TransactionIndexViewModel.cs" />
+    <Compile Include="ViewModels\ReportDetailViewModel.cs" />
+    <Compile Include="ViewModels\CategoryDetailViewModel.cs" />
+    <Compile Include="ViewModels\ReportIndexViewModel.cs" />
+    <Compile Include="Web.config.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Web.config.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content\images\favicon.ico" />
+    <Content Include="content\images\logo.png" />
+    <Content Include="content\images\sprites.png" />
+    <Content Include="content\images\ui\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="content\images\ui\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="content\images\ui\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="content\images\ui\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="content\images\ui\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="content\images\ui\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="content\images\ui\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="content\images\ui\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="content\images\ui\ui-icons_217bc0_256x240.png" />
+    <Content Include="content\images\ui\ui-icons_2e83ff_256x240.png" />
+    <Content Include="content\images\ui\ui-icons_469bdd_256x240.png" />
+    <Content Include="content\images\ui\ui-icons_6da8d5_256x240.png" />
+    <Content Include="content\images\ui\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="content\images\ui\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="content\images\ui\ui-icons_f9bd01_256x240.png" />
+    <Content Include="content\scripts\jquery-ui-1.8.11.js" />
+    <Content Include="content\scripts\jquery-1.6.4.js" />
+    <Content Include="content\scripts\functions.js" />
+    <Content Include="content\site.css" />
+    <Content Include="content\ui.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Views\Accounts\Add.aspx" />
+    <Content Include="Views\Accounts\Breadcrumb.ascx" />
+    <Content Include="Views\Categories\Breadcrumb.ascx" />
+    <Content Include="Views\Categories\All.aspx" />
+    <Content Include="Views\Categories\Details.aspx" />
+    <Content Include="Views\Categories\Edit.aspx" />
+    <Content Include="Views\Categories\Index.aspx" />
+    <Content Include="Views\Reports\Breadcrumb.ascx" />
+    <Content Include="Views\Reports\Details.aspx" />
+    <Content Include="Views\Reports\Index.aspx" />
+    <Content Include="Views\Shared\Breadcrumb.ascx" />
+    <Content Include="Views\Shared\Header.ascx" />
+    <Content Include="Views\Transactions\Breadcrumb.ascx" />
+    <Content Include="Views\Transactions\Add.aspx" />
+    <Content Include="Views\Shared\EditorTemplates\CategoryList.ascx" />
+    <Content Include="Views\Shared\EditorTemplates\BusDate.ascx" />
+    <Content Include="Views\Transactions\Index.aspx" />
+    <Content Include="Views\Transactions\Edit.aspx" />
+    <Content Include="Views\Accounts\Edit.aspx" />
+    <Content Include="Views\Transactions\History.aspx" />
+    <Content Include="Views\Accounts\Index.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\Site.Master" />
+    <Content Include="Views\Web.config" />
+    <Content Include="web-log4net.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\framework\trunk\src\framework\common\DL.Framework.Common.csproj">
+      <Project>{D9DB2F88-049D-4846-8F89-C8219DD422BD}</Project>
+      <Name>DL.Framework.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\framework\trunk\src\framework\services\DL.Framework.Services.csproj">
+      <Project>{2a989aa4-d09d-4882-a9f0-cf99871b2d1e}</Project>
+      <Name>DL.Framework.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\framework\trunk\src\framework\web\DL.Framework.Web.csproj">
+      <Project>{4af0d889-26bf-46e6-bbc2-0915f86f6922}</Project>
+      <Name>DL.Framework.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\domain\DL.AccountChecker.Domain.csproj">
+      <Project>{7CD0D295-0D79-4C0C-BFEC-7C3AA5DF95BB}</Project>
+      <Name>DL.AccountChecker.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\framework\DL.AccountChecker.Framework.csproj">
+      <Project>{d6b739d0-15d0-4de1-b52b-3d43e7f557a1}</Project>
+      <Name>DL.AccountChecker.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\model\DL.AccountChecker.Model.csproj">
+      <Project>{ABCAF361-98C2-48B0-80B8-6C2E8E7A9871}</Project>
+      <Name>DL.AccountChecker.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web.config.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Web.config.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,7 @@
+﻿<f:TransactionEditViewModel xmlns:f="clr-namespace:DL.AccountChecker.Suite.WPF"
+                        xmlns:m="clr-namespace:DL.AccountChecker.Model;assembly=DL.AccountChecker.Model"
+                        xmlns:d="clr-namespace:DL.AccountChecker.Domain;assembly=DL.AccountChecker.Domain">
+    <f:TransactionEditViewModel.Transaction>
+        <d:Transaction AccountId="1" UniqueId="1234" Description="Example transaction" Amount="50" />
+    </f:TransactionEditViewModel.Transaction>
+</f:TransactionEditViewModel>

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0BA6CC92-2026-46CA-A85E-D3B697177D32}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DL.AccountChecker.Services.WorkflowService</RootNamespace>
+    <AssemblyName>DL.AccountChecker.Services.WorkflowService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\..\dependencies\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="WorkflowService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Installer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Loader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\businesslogic\Config\account.xml">
+      <Link>SpringXml\account.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\businesslogic\Config\allowance.xml">
+      <Link>SpringXml\allowance.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\businesslogic\Config\budget.xml">
+      <Link>SpringXml\budget.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\businesslogic\Config\cache.xml">
+      <Link>SpringXml\cache.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\businesslogic\Config\category.xml">
+      <Link>SpringXml\category.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\businesslogic\Config\db.xml">
+      <Link>SpringXml\db.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\businesslogic\Config\framework.xml">
+      <Link>SpringXml\framework.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\businesslogic\Config\messaging.xml">
+      <Link>SpringXml\messaging.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\businesslogic\Config\transaction.xml">
+      <Link>SpringXml\transaction.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="workflowservice-log4net.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="workflowservice-spring.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\framework\trunk\src\framework\common\DL.Framework.Common.csproj">
+      <Project>{d9db2f88-049d-4846-8f89-c8219dd422bd}</Project>
+      <Name>DL.Framework.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\framework\trunk\src\framework\services\DL.Framework.Services.csproj">
+      <Project>{2a989aa4-d09d-4882-a9f0-cf99871b2d1e}</Project>
+      <Name>DL.Framework.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\domain\DL.AccountChecker.Domain.csproj">
+      <Project>{7cd0d295-0d79-4c0c-bfec-7c3aa5df95bb}</Project>
+      <Name>DL.AccountChecker.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\framework\DL.AccountChecker.Framework.csproj">
+      <Project>{d6b739d0-15d0-4de1-b52b-3d43e7f557a1}</Project>
+      <Name>DL.AccountChecker.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\servers\DL.AccountChecker.Servers.csproj">
+      <Project>{f98d8d5c-07d1-46df-ac91-4f6f850d4c0e}</Project>
+      <Name>DL.AccountChecker.Servers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

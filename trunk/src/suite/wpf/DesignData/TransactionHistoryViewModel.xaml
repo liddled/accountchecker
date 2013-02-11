@@ -1,0 +1,8 @@
+﻿<f:TransactionHistoryViewModel xmlns:f="clr-namespace:DL.AccountChecker.Suite.WPF"
+                        xmlns:m="clr-namespace:DL.AccountChecker.Model;assembly=DL.AccountChecker.Model"
+                        xmlns:d="clr-namespace:DL.AccountChecker.Domain;assembly=DL.AccountChecker.Domain">
+    <f:TransactionHistoryViewModel.TransactionHistory>
+        <m:TransactionHistoryModel Income="500" Outcome="600" TransactionCount="22">
+        </m:TransactionHistoryModel>
+    </f:TransactionHistoryViewModel.TransactionHistory>
+</f:TransactionHistoryViewModel>

@@ -1,0 +1,80 @@
+<#@ include file="..\..\config\Settings.config.tt" #>
+<#
+
+	Set(DEFAULT, "log4netConfigFile", "~/wpf-log4net.xml");
+	Set(DEFAULT, "springConfigFile", "~/wpf-spring.xml");
+	
+	GenerateContent(LOCAL);
+	SaveOutput("App.config");
+
+#>
+<#+ void GenerateContent(string env) { #>
+<!-- ================================================================ -->
+<!-- = IMPORTANT: This is an auto-generated file. Please do not     = -->
+<!-- = change this file manually. If changes are required, please   = -->
+<!-- = change App.Config.tt (template file) instead.                = -->
+<!-- ================================================================ -->
+<configuration>
+	<configSections>
+		<sectionGroup name="common">
+			<section name="logging" type="Common.Logging.ConfigurationSectionHandler, Common.Logging" />
+		</sectionGroup>
+		<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+		<sectionGroup name="spring">
+			<section name="context" type="Spring.Context.Support.ContextHandler, Spring.Core" />
+			<section name="objects" type="Spring.Context.Support.DefaultSectionHandler, Spring.Core" />
+		</sectionGroup>
+	</configSections>
+	
+	<common>
+		<logging>
+			<factoryAdapter type="Common.Logging.Log4Net.Log4NetLoggerFactoryAdapter, Common.Logging.Log4Net">
+				<arg key="configType" value="FILE-WATCH" />
+				<arg key="configFile" value="<#= Get(env, "log4netConfigFile") #>" />
+			</factoryAdapter>
+		</logging>
+	</common>
+	
+	<spring>
+		<context>
+			<arg key="configFile" value="<#= Get(env, "springConfigFile") #>" />
+		</context>
+	</spring>
+	
+	<system.diagnostics>
+		<sources>
+			<source name="System.ServiceModel" switchValue="Information, ActivityTracing" propagateActivity="true">
+				<listeners>
+					<add name="traceListener" type="System.Diagnostics.XmlWriterTraceListener" initializeData="wpf.svclog" />
+				</listeners>
+			</source>
+		</sources>
+	</system.diagnostics>
+	
+	<system.serviceModel>
+		<client>
+			<endpoint name="<#= Get(env, "guiServiceEndPointName") #>" address="net.tcp://<#= Get(env, "guiServiceHostname") #>:<#= Get(env, "guiServicePort") #>/AccountCheckerGuiService" contract="DL.AccountChecker.Framework.IGuiService" binding="netTcpBinding" behaviorConfiguration="endPointBehaviorConfiguration" bindingConfiguration="binaryTcpBinding" />
+			<endpoint name="<#= Get(env, "guiSubscriptionServiceEndPointName") #>" address="net.tcp://<#= Get(env, "guiServiceHostname") #>:<#= Get(env, "guiSubscriptionServicePort") #>/AccountCheckerSubscriptionService" contract="DL.AccountChecker.Framework.ISubscriptionService" binding="netTcpBinding" behaviorConfiguration="endPointBehaviorConfiguration" bindingConfiguration="binaryTcpBinding" />
+		</client>
+		<behaviors>
+			<endpointBehaviors>
+				<behavior name="endPointBehaviorConfiguration">
+					<dataContractSerializer maxItemsInObjectGraph="100000000" />
+				</behavior>
+			</endpointBehaviors>
+		</behaviors>
+		<bindings>
+			<netTcpBinding>
+				<binding name="binaryTcpBinding" receiveTimeout="23:00:00" maxReceivedMessageSize="2147483647" sendTimeout="00:10:10" maxConnections="1000">
+					<reliableSession inactivityTimeout="23:00:00" />
+					<readerQuotas maxDepth="2147483647" maxStringContentLength="2147483647" maxArrayLength="2147483647" maxBytesPerRead="2147483647" maxNameTableCharCount="2147483647" />
+					<security mode="Transport">
+						<transport clientCredentialType="Windows" protectionLevel="None" />
+					</security>
+				</binding>
+			</netTcpBinding>
+		</bindings>
+	</system.serviceModel>
+</configuration>
+
+<#+ } #>

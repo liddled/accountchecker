@@ -1,0 +1,14 @@
+create table [dbo].[CATEGORY]
+(
+	CATEGORY_ID bigint not null,
+	CATEGORY_NAME nvarchar(30) not null,
+	[STATUS] nvarchar(20) not null
+)
+go
+
+alter table [dbo].[CATEGORY]
+	add constraint PK_CATEGORY primary key nonclustered
+	(
+		CATEGORY_ID
+	)
+go

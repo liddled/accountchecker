@@ -1,0 +1,38 @@
+create table [dbo].[TRANSACTION]
+(
+	TRANSACTION_ID bigint not null,
+	UNIQUE_ID nvarchar(100) null,
+	ACCOUNT_ID bigint not null,
+	[DATE] int not null,
+	[DESCRIPTION] nvarchar(max) not null,
+	AMOUNT decimal(12,2) not null,
+	[STATUS] nvarchar(20) not null
+)
+go
+
+alter table [dbo].[TRANSACTION]
+	add constraint PK_TRANSACTION primary key nonclustered
+	(
+		TRANSACTION_ID asc
+	)
+go
+
+alter table [dbo].[TRANSACTION]
+	add constraint FK_TRANSACTION_ACCOUNT foreign key
+	(
+		ACCOUNT_ID
+	)
+	references [dbo].[ACCOUNT]
+	(
+		ACCOUNT_ID
+	)
+go
+
+create clustered index IX_TRANSACTION on [dbo].[TRANSACTION]
+(
+	TRANSACTION_ID,
+	UNIQUE_ID,
+	ACCOUNT_ID,
+	[DATE]
+)
+go

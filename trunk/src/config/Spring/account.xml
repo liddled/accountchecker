@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<objects xmlns="http://www.springframework.net"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd">
+
+  <description>Definition of objects to be registered via Spring.</description>
+
+  <object id="accountManager" type="DL.AccountChecker.BusinessLogic.AccountManager, DL.AccountChecker.BusinessLogic">
+    <constructor-arg name="accountRepository" ref="accountRepository" />
+  </object>
+
+  <object id="accountManagerFactory" type="DL.AccountChecker.BusinessLogic.AccountManagerFactory, DL.AccountChecker.BusinessLogic">
+    <constructor-arg name="cachedTypes" ref="cachedTypes" />
+    <constructor-arg name="accountManager" ref="accountManager" />
+    <constructor-arg name="idAllocationManager" ref="idAllocationManager" />
+  </object>
+
+</objects>

@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{E6A5AFC2-EBB6-4AF4-8D4D-120E0745B172}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DL.AccountChecker.Services.GuiService</RootNamespace>
+    <AssemblyName>DL.AccountChecker.Services.GuiService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\..\dependencies\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net">
+      <HintPath>..\..\..\dependencies\Common.Logging.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\..\..\dependencies\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\..\..\dependencies\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\..\..\dependencies\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.config1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>App.config.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CacheLoaders\AccountCacheLoader.cs" />
+    <Compile Include="CacheLoaders\CategoryCacheLoader.cs" />
+    <Compile Include="CacheLoaders\TransactionCacheLoader.cs" />
+    <Compile Include="Installer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Service.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Loader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\GuiService.cs" />
+    <Compile Include="Service\SubscriptionService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="..\..\config\Spring\account.xml">
+      <Link>SpringXml\account.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\config\Spring\cache.xml">
+      <Link>SpringXml\cache.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\config\Spring\category.xml">
+      <Link>SpringXml\category.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\config\Spring\framework.xml">
+      <Link>SpringXml\framework.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\config\Spring\messaging.xml">
+      <Link>SpringXml\messaging.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\config\Spring\repository.redis.xml">
+      <Link>SpringXml\repository.redis.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\config\Spring\repository.sql.xml">
+      <Link>SpringXml\repository.sql.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\config\Spring\transaction.xml">
+      <Link>SpringXml\transaction.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="guiservice-spring.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="guiservice-log4net.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="App.config.tt">
+      <SubType>Designer</SubType>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>App.config1.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\framework\trunk\src\framework\common\DL.Framework.Common.csproj">
+      <Project>{D9DB2F88-049D-4846-8F89-C8219DD422BD}</Project>
+      <Name>DL.Framework.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\framework\trunk\src\framework\messaging\DL.Framework.Messaging.csproj">
+      <Project>{d7be5f2f-0e15-4e39-a10f-ffce297d13cc}</Project>
+      <Name>DL.Framework.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\framework\trunk\src\framework\services\DL.Framework.Services.csproj">
+      <Project>{2A989AA4-D09D-4882-A9F0-CF99871B2D1E}</Project>
+      <Name>DL.Framework.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\businesslogic\DL.AccountChecker.BusinessLogic.csproj">
+      <Project>{51dd3219-67e8-4bf0-bda8-44408b05b79e}</Project>
+      <Name>DL.AccountChecker.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\common\DL.AccountChecker.Common.csproj">
+      <Project>{8e09383f-0c32-4979-9305-cab75d2e137f}</Project>
+      <Name>DL.AccountChecker.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\domain\DL.AccountChecker.Domain.csproj">
+      <Project>{7CD0D295-0D79-4C0C-BFEC-7C3AA5DF95BB}</Project>
+      <Name>DL.AccountChecker.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\framework\DL.AccountChecker.Framework.csproj">
+      <Project>{D6B739D0-15D0-4DE1-B52B-3D43E7F557A1}</Project>
+      <Name>DL.AccountChecker.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\repositories\redis\DL.AccountChecker.Repositories.Redis.csproj">
+      <Project>{f8f2148a-544b-4445-8b68-3fa0bc70669e}</Project>
+      <Name>DL.AccountChecker.Repositories.Redis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\repositories\sql\DL.AccountChecker.Repositories.Sql.csproj">
+      <Project>{0723b0df-741b-4754-804c-00a004f1a096}</Project>
+      <Name>DL.AccountChecker.Repositories.Sql</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<objects xmlns="http://www.springframework.net"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd">
+
+  <description>Definition of objects to be registered via Spring.</description>
+
+  <object id="cachedTypes" type="DL.Framework.Common.CachedTypes, DL.Framework.Common">
+    <constructor-arg name="caches">
+      <list element-type="DL.Framework.Common.IGenericCache, DL.Framework.Common">
+        <object type="DL.Framework.Common.GenericCache&lt;DL.AccountChecker.Domain.Account>"/>
+        <object type="DL.Framework.Common.GenericCache&lt;DL.AccountChecker.Domain.Category>"/>
+        <object type="DL.Framework.Common.GenericCache&lt;DL.AccountChecker.Domain.Transaction>"/>
+        <object type="DL.Framework.Common.GenericCache&lt;DL.AccountChecker.Domain.TransactionInfo>"/>
+        <object type="DL.Framework.Common.GenericCache&lt;DL.AccountChecker.Domain.TransactionCategory>"/>
+      </list>
+    </constructor-arg>
+  </object>
+
+  <object id="cacheLoaders" type="System.Collections.Generic.List&lt;DL.Framework.Common.ICacheLoader>">
+    <constructor-arg index="0">
+      <list element-type="DL.Framework.Common.ICacheLoader, DL.Framework.Common">
+        <object type="DL.AccountChecker.Services.GuiService.AccountCacheLoader, DL.AccountChecker.Services.GuiService">
+          <constructor-arg name="cachedTypes" ref="cachedTypes" />
+          <constructor-arg name="repository" ref="accountRepository" />
+        </object>
+        <object type="DL.AccountChecker.Services.GuiService.CategoryCacheLoader, DL.AccountChecker.Services.GuiService">
+          <constructor-arg name="cachedTypes" ref="cachedTypes" />
+          <constructor-arg name="repository" ref="categoryRepository" />
+        </object>
+        <object type="DL.AccountChecker.Services.GuiService.TransactionCacheLoader, DL.AccountChecker.Services.GuiService">
+          <constructor-arg name="cachedTypes" ref="cachedTypes" />
+          <constructor-arg name="repository" ref="transactionRepository" />
+        </object>
+      </list>
+    </constructor-arg>
+  </object>
+
+</objects>

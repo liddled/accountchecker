@@ -1,0 +1,16 @@
+﻿<f:AccountSummaryListViewModel xmlns:f="clr-namespace:DL.AccountChecker.Suite.WPF"
+                               xmlns:m="clr-namespace:DL.AccountChecker.Model;assembly=DL.AccountChecker.Model"
+                               xmlns:d="clr-namespace:DL.AccountChecker.Domain;assembly=DL.AccountChecker.Domain">
+    <!--<f:AccountSummaryListViewModel.AccountSummaries>
+        <m:AccountSummaryModel TransactionCount="1" Outcome="40" Income="20">
+            <m:AccountSummaryModel.Account>
+                <d:Account2 AccountId="1"  BankName="dsads"  BankCode="hidsdsa" CardNumber="dsadsa" Locale="en-US" />
+            </m:AccountSummaryModel.Account>
+        </m:AccountSummaryModel>
+        <m:AccountSummaryModel TransactionCount="2" Outcome="30" Income="10">
+            <f:AccountSummaryModel.Account>
+                <m:Account AccountId="1"  BankName="dsads"  BankCode="hidsdsa" CardNumber="dsadsa" Locale="en-US" />
+            </f:AccountSummaryModel.Account>
+        </m:AccountSummaryModel>
+    </f:AccountSummaryListViewModel.AccountSummaries>-->
+</f:AccountSummaryListViewModel>

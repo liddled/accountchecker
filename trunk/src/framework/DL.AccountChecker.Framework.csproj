@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D6B739D0-15D0-4DE1-B52B-3D43E7F557A1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DL.AccountChecker.Framework</RootNamespace>
+    <AssemblyName>DL.AccountChecker.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Service\ISubscriptionService.cs" />
+    <Compile Include="Subscription\ISubscriptionCallback.cs" />
+    <Compile Include="Topic.cs" />
+    <Compile Include="Factory\ITransactionManagerFactory.cs" />
+    <Compile Include="Factory\ICategoryManagerFactory.cs" />
+    <Compile Include="Factory\IAccountManagerFactory.cs" />
+    <Compile Include="Filter\TransactionFilter.cs" />
+    <Compile Include="Manager\ITransactionManager.cs" />
+    <Compile Include="Manager\ICategoryManager.cs" />
+    <Compile Include="Manager\IIdAllocationManager.cs" />
+    <Compile Include="Manager\IAccountManager.cs" />
+    <Compile Include="Repository\IAccountRepository.cs" />
+    <Compile Include="Repository\ICategoryRepository.cs" />
+    <Compile Include="Repository\IIdAllocationRepository.cs" />
+    <Compile Include="Excel\IExcelController.cs" />
+    <Compile Include="Repository\ITransactionRepository.cs" />
+    <Compile Include="Service\ISyncService.cs" />
+    <Compile Include="Service\IExcelService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\IGuiService.cs" />
+    <Compile Include="Service\IWorkflowService.cs" />
+    <Compile Include="Sync\ITradeSync.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\trunk\src\framework\common\DL.Framework.Common.csproj">
+      <Project>{D9DB2F88-049D-4846-8F89-C8219DD422BD}</Project>
+      <Name>DL.Framework.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\domain\DL.AccountChecker.Domain.csproj">
+      <Project>{7CD0D295-0D79-4C0C-BFEC-7C3AA5DF95BB}</Project>
+      <Name>DL.AccountChecker.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

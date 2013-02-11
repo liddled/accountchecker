@@ -1,0 +1,17 @@
+create table [dbo].[ENTITY_ID_RANGE]
+(
+	ENTITY_TYPE_ID bigint not null,
+	NAME nvarchar(50) not null,
+	START_ID bigint not null,
+	END_ID bigint not null,
+	CURRENT_ID bigint not null,
+	SEQUENCE bigint not null
+)
+go
+
+alter table [dbo].[ENTITY_ID_RANGE]
+	add constraint PK_ENTITY_ID_RANGE primary key nonclustered
+	(
+		ENTITY_TYPE_ID
+	)
+go

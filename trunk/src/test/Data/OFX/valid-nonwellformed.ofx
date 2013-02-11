@@ -1,0 +1,266 @@
+﻿OFXHEADER:100
+DATA:OFXSGML
+VERSION:102
+SECURITY:NONE
+ENCODING:USASCII
+CHARSET:1252
+COMPRESSION:NONE
+OLDFILEUID:NONE
+NEWFILEUID:NONE
+
+<OFX>
+  <SIGNONMSGSRSV1>
+    <SONRS>
+      <STATUS>
+        <CODE>0
+        <SEVERITY>INFO
+      </STATUS>
+      <DTSERVER>20120519103213[-5:EST]
+      <LANGUAGE>ENG
+    </SONRS>
+  </SIGNONMSGSRSV1>
+  <BANKMSGSRSV1>
+    
+    <STMTTRNRS>
+      <TRNUID>1
+      <STATUS>
+        <CODE>0
+        <SEVERITY>INFO
+      </STATUS>
+      <STMTRS>
+        <CURDEF>GBP
+        <BANKACCTFROM>
+          <BANKID>492900
+          <ACCTID>20851360276960
+          <ACCTTYPE>CHECKING
+        </BANKACCTFROM>
+        <BANKTRANLIST>
+          <DTSTART>20120429103213[-5:EST]
+          <DTEND>20120519103213[-5:EST]
+          
+          <STMTTRN>
+            <TRNTYPE>CASH
+            <DTPOSTED>20120518000000[-5:EST]
+            <TRNAMT>-80.00
+            <FITID>+201205180000004
+            
+            <NAME>YCASH ALLEN &amp; OVERY LLP 18MAY 14
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120518000000[-5:EST]
+            <TRNAMT>-14.53
+            <FITID>+201205180000003
+            
+            <NAME>SAINSBURYS SUPERMA REF 137 75253
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120518000000[-5:EST]
+            <TRNAMT>-12.00
+            <FITID>+201205180000002
+            
+            <NAME>MONSOON/ACCZ LTD REF 137 0980720
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120518000000[-5:EST]
+            <TRNAMT>-10.00
+            <FITID>+201205180000001
+            
+            <NAME>A&amp;O CASHLESS SVCS REF 137 727183
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120516000000[-5:EST]
+            <TRNAMT>-17.50
+            <FITID>+201205160000001
+            
+            <NAME>MARKS &amp; SPENCER SS REF 135 09877
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120515000000[-5:EST]
+            <TRNAMT>-4.95
+            <FITID>+201205150000003
+            
+            <NAME>A&amp;O LAVANDA KIOSK REF 132 609757
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120515000000[-5:EST]
+            <TRNAMT>-23.78
+            <FITID>+201205150000002
+            
+            <NAME>BOOTS,0803 REF 132 1356533221 BC
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120515000000[-5:EST]
+            <TRNAMT>-13.50
+            <FITID>+201205150000001
+            
+            <NAME>THE BODY SHOP REF 132 1356534221
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120514000000[-5:EST]
+            <TRNAMT>-19.53
+            <FITID>+201205140000002
+            
+            <NAME>WWW.WORKSWITHWATER REF 131 09895
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120514000000[-5:EST]
+            <TRNAMT>-15.00
+            <FITID>+201205140000001
+            
+            <NAME>JUSTGIVING.COM REF 131 741149722
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120511000000[-5:EST]
+            <TRNAMT>-14.45
+            <FITID>+201205110000001
+            
+            <NAME>EIGHT SQ REF 130 0977946221 BCC
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>CASH
+            <DTPOSTED>20120510000000[-5:EST]
+            <TRNAMT>-50.00
+            <FITID>+201205100000006
+            
+            <NAME>YCASH ALLEN &amp; OVERY LLP 09MAY 18
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120510000000[-5:EST]
+            <TRNAMT>-131.40
+            <FITID>+201205100000005
+            
+            <NAME>TFL MFM REF 129 7435754221 BCC
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120510000000[-5:EST]
+            <TRNAMT>-9.18
+            <FITID>+201205100000004
+            
+            <NAME>HOLLAND &amp; BARRETT REF 129 099245
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120510000000[-5:EST]
+            <TRNAMT>-5.50
+            <FITID>+201205100000003
+            
+            <NAME>CLAIRES ACCESSORIE REF 129 09924
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120510000000[-5:EST]
+            <TRNAMT>-5.00
+            <FITID>+201205100000002
+            
+            <NAME>TFL MFM REF 129 7435758221 BCC
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120510000000[-5:EST]
+            <TRNAMT>-4.75
+            <FITID>+201205100000001
+            
+            <NAME>FUNKY PIGEON REF 129 0992453221 
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>OTHER
+            <DTPOSTED>20120509000000[-5:EST]
+            <TRNAMT>65.00
+            <FITID>+201205090000007
+            
+            <NAME>REFUND WAREHOUSE BLOMFIEL REF 12
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120509000000[-5:EST]
+            <TRNAMT>-90.00
+            <FITID>+201205090000006
+            
+            <NAME>WHISTLES LTD REF 126 1546027221 
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120509000000[-5:EST]
+            <TRNAMT>-38.25
+            <FITID>+201205090000005
+            
+            <NAME>SAINSBURY'S S/MKT REF 127 709708
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120509000000[-5:EST]
+            <TRNAMT>-34.12
+            <FITID>+201205090000004
+            
+            <NAME>BOOTS 1103 REF 125 1546025221 BC
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120509000000[-5:EST]
+            <TRNAMT>-27.99
+            <FITID>+201205090000003
+            
+            <NAME>WWW.LINDYBOP.CO.UK REF 105 15460
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120509000000[-5:EST]
+            <TRNAMT>-15.90
+            <FITID>+201205090000002
+            
+            <NAME>WIMBLEDON SEWING M REF 126 15460
+          </STMTTRN>
+          
+          <STMTTRN>
+            <TRNTYPE>PAYMENT
+            <DTPOSTED>20120509000000[-5:EST]
+            <TRNAMT>-8.35
+            <FITID>+201205090000001
+            
+            <NAME>MARKS &amp; SPENCER SS REF 125 15460
+          </STMTTRN>
+          
+        </BANKTRANLIST>
+        <LEDGERBAL>
+          <BALAMT>1407.95
+          <DTASOF>20120518000000[-5:EST]
+        </LEDGERBAL>
+      </STMTRS>
+    </STMTTRNRS>
+    
+  </BANKMSGSRSV1>
+</OFX>

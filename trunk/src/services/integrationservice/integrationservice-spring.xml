@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<objects xmlns="http://www.springframework.net"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd">
+
+  <description>Definition of objects to be registered via Spring.</description>
+
+  <object name="appConfigPropertyHolder" type="Spring.Objects.Factory.Config.PropertyPlaceholderConfigurer, Spring.Core">
+    <property name="configSections" value="appSettings" />
+  </object>
+
+  <import resource="SpringXml\messaging.xml" />
+
+  <object id="workflowList" autowire="autodetect" type="System.Collections.Generic.List&lt;DL.Framework.Common.IWorkflow>">
+    <constructor-arg index="0">
+      <list element-type="DL.Framework.Common.IWorkflow, DL.Framework.Common">
+        <object type="DL.AccountChecker.BusinessLogic.TransactionLoader, DL.AccountChecker.BusinessLogic">
+          <constructor-arg name="messagePublisher" ref="rabbitMqPublisher" />
+          <constructor-arg name="cacheDestination" value="accountchecker.domain.transactions" />
+          <constructor-arg name="inputFolder" value="c:\development\accountchecker\files\input\transactions" />
+          <constructor-arg name="processedFolder" value="c:\development\accountchecker\files\processed\transactions" />
+          <constructor-arg name="fileFilter" value="*.*" />
+        </object>
+      </list>
+    </constructor-arg>
+  </object>
+  
+</objects>

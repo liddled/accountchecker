@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B1B43B1A-ABCA-4262-93A1-EEF231189FB1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DL.AccountChecker.Suite.WPF</RootNamespace>
+    <AssemblyName>DL.AccountChecker.Suite.WPF</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\..\dependencies\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net">
+      <HintPath>..\..\..\dependencies\Common.Logging.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\dependencies\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\..\..\dependencies\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.UnityExtensions">
+      <HintPath>..\..\..\dependencies\Microsoft.Practices.Prism.UnityExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\dependencies\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\dependencies\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.config.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>App.config.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\INavigationController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\OperationController.cs" />
+    <Compile Include="Modules\AccountModule.cs" />
+    <Compile Include="Modules\CategoryModule.cs" />
+    <Compile Include="Modules\ReportModule.cs" />
+    <Compile Include="Modules\ShellModule.cs" />
+    <Compile Include="Modules\TransactionModule.cs" />
+    <Compile Include="ViewModel\Accounts\AccountAddViewModel.cs" />
+    <Compile Include="ViewModel\Accounts\AccountEditViewModel.cs" />
+    <Compile Include="ViewModel\Accounts\AccountSummaryListViewModel.cs" />
+    <Compile Include="ViewModel\Categories\CategorySummaryListViewModel.cs" />
+    <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="ViewModel\Reports\ReportSummaryListViewModel.cs" />
+    <Compile Include="ViewModel\Transactions\TransactionAddViewModel.cs" />
+    <Compile Include="ViewModel\Transactions\TransactionEditViewModel.cs" />
+    <Compile Include="ViewModel\Transactions\TransactionHistoryViewModel.cs" />
+    <Compile Include="ViewModel\Transactions\TransactionSummaryListViewModel.cs" />
+    <Compile Include="Views\Accounts\AccountAddView.xaml.cs">
+      <DependentUpon>AccountAddView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Accounts\AccountEditView.xaml.cs">
+      <DependentUpon>AccountEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Accounts\AccountSummaryListView.xaml.cs">
+      <DependentUpon>AccountSummaryListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Categories\CategorySummaryListView.xaml.cs">
+      <DependentUpon>CategorySummaryListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HeaderView.xaml.cs">
+      <DependentUpon>HeaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\ReportSummaryListView.xaml.cs">
+      <DependentUpon>ReportSummaryListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Transactions\TransactionAddView.xaml.cs">
+      <DependentUpon>TransactionAddView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Transactions\TransactionEditView.xaml.cs">
+      <DependentUpon>TransactionEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Transactions\TransactionHistoryView.xaml.cs">
+      <DependentUpon>TransactionHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Transactions\TransactionSummaryListView.xaml.cs">
+      <DependentUpon>TransactionSummaryListView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="DesignData\AccountEditViewModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DesignData\AccountSummaryListViewModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DesignData\CategorySummaryListViewModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DesignData\TransactionEditViewModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DesignData\ReportSummaryListViewModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DesignData\TransactionHistoryViewModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bootstrapper.cs" />
+    <Page Include="Skins\Default\Accounts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Default\Categories.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Default\Reports.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Default\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Default\Transactions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Accounts\AccountAddView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Accounts\AccountEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Accounts\AccountSummaryListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Categories\CategorySummaryListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\HeaderView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\ReportSummaryListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ShellView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Transactions\TransactionAddView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Transactions\TransactionEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Transactions\TransactionHistoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Transactions\TransactionSummaryListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.config.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>App.config.cs</LastGenOutput>
+    </None>
+    <None Include="DL.AccountChecker.Suite.WPF.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\framework\trunk\src\framework\common\DL.Framework.Common.csproj">
+      <Project>{d9db2f88-049d-4846-8f89-c8219dd422bd}</Project>
+      <Name>DL.Framework.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\framework\trunk\src\framework\services\DL.Framework.Services.csproj">
+      <Project>{2a989aa4-d09d-4882-a9f0-cf99871b2d1e}</Project>
+      <Name>DL.Framework.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\framework\trunk\src\framework\wpf\DL.Framework.WPF.csproj">
+      <Project>{10218e54-1dae-4249-b53c-a1b57f0c7d71}</Project>
+      <Name>DL.Framework.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\domain\DL.AccountChecker.Domain.csproj">
+      <Project>{7cd0d295-0d79-4c0c-bfec-7c3aa5df95bb}</Project>
+      <Name>DL.AccountChecker.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\framework\DL.AccountChecker.Framework.csproj">
+      <Project>{d6b739d0-15d0-4de1-b52b-3d43e7f557a1}</Project>
+      <Name>DL.AccountChecker.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\model\DL.AccountChecker.Model.csproj">
+      <Project>{abcaf361-98c2-48b0-80b8-6c2e8e7a9871}</Project>
+      <Name>DL.AccountChecker.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\service\DL.AccountChecker.Suite.Service.csproj">
+      <Project>{eb19b3dd-61d5-4d9a-b23f-13145abeb948}</Project>
+      <Name>DL.AccountChecker.Suite.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\Images\account_l.png" />
+    <Resource Include="Content\Images\account_s.png" />
+    <Resource Include="Content\Images\bg.jpg" />
+    <Resource Include="Content\Images\favicon.ico" />
+    <Resource Include="Content\Images\logo.png" />
+    <Resource Include="Content\Images\transaction_l.png" />
+    <Resource Include="Content\Images\transaction_s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\Images\report_l.png" />
+    <Resource Include="Content\Images\report_s.png" />
+    <Resource Include="Content\Images\category_l.png" />
+    <Resource Include="Content\Images\category_s.png" />
+    <Resource Include="Content\Images\exclude.png" />
+    <Resource Include="Content\Images\exclude_hover.png" />
+    <Resource Include="Content\Images\include.png" />
+    <Resource Include="Content\Images\include_hover.png" />
+    <Content Include="wpf-log4net.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wpf-spring.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,133 @@
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:f="clr-namespace:DL.Framework.WPF;assembly=DL.Framework.WPF">
+
+    <Style x:Key="BaseContentCard" TargetType="{x:Type f:ContentCard}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type f:ContentCard}">
+                    <Grid VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" CornerRadius="5,0,0,0" Background="{TemplateBinding BorderBrush}">
+                            <ContentPresenter Content="{TemplateBinding Header}" MinHeight="{TemplateBinding MinHeight}" />
+                        </Border>
+                        <Border Grid.Row="1" Margin="0,0,0,2"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="5,5,5,5" 
+                                CornerRadius="0,0,5,5">
+                            <ContentPresenter Content="{TemplateBinding Content}" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Dotted Border -->
+    <Style x:Key="DottedBorderStyle" TargetType="Rectangle">
+        <Setter Property="Height" Value="1" />
+        <Setter Property="Stroke" Value="#999999" />
+        <Setter Property="StrokeDashArray" Value="2 2" />
+        <Setter Property="StrokeThickness" Value="1.001" />
+    </Style>
+
+    <!-- TextBlocks -->
+    <Style x:Key="TextBlockUnderline" TargetType="TextBlock">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="TextDecorations" Value="Underline" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TextBlockLink" TargetType="TextBlock" BasedOn="{StaticResource TextBlockUnderline}">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{DynamicResource LinkColor}" />
+        <Setter Property="f:CommandBehavior.Event" Value="MouseDown" />
+    </Style>
+
+    <Style x:Key="TextBlockArrow" TargetType="TextBlock" BasedOn="{StaticResource TextBlockLink}">
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+
+    <!-- Link Button -->
+    <Style x:Key="LinkButtonStyle" TargetType="TextBlock">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="TextDecorations" Value="Underline" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="LinkButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <TextBlock Text="{TemplateBinding Content}" Style="{StaticResource LinkButtonStyle}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Style Button -->
+    <LinearGradientBrush x:Key="ButtonBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Offset="0">
+            <GradientStop.Color>
+                <Color A="255" R="250" G="250" B="250" />
+            </GradientStop.Color>
+        </GradientStop>
+        <GradientStop Offset="1">
+            <GradientStop.Color>
+                <Color A="255" R="70" G="70" B="70" />
+            </GradientStop.Color>
+        </GradientStop>
+    </LinearGradientBrush>
+                         
+    
+    <Style x:Key="LeftButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Name="ButtonBorder"
+                            CornerRadius="4,0,0,4"
+                            BorderThickness="1"
+                            BorderBrush="Gray"
+                            Background="{StaticResource ButtonBrush}">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- BoxPanel -->
+    <Style x:Key="BaseBoxPanel" TargetType="StackPanel">
+        <Setter Property="Height" Value="50" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Orientation" Value="Vertical" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="130" />
+    </Style>
+
+    <Style x:Key="BoxPanelBorder" TargetType="Border">
+        <Setter Property="CornerRadius" Value="6" />
+    </Style>
+
+    <Style x:Key="BoxPanelNumber" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="BoxPanelText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+</ResourceDictionary>

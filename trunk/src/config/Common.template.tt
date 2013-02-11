@@ -1,0 +1,92 @@
+﻿<#@ template language="C#" debug="True" hostspecific="true"#>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+	// environment holding default values.
+	private const string DEFAULT = "default";
+	private const string LOCAL = "LOCAL";
+	
+	string[] Envs = { LOCAL };	
+	private IDictionary<string, IDictionary<string,string>> envParam = new Dictionary<string, IDictionary<string,string>>();
+	
+	//--------------------------------------------------------------------------
+	// Helper function to get a parameter value for a given environment.
+	// If no matching parameter value is found, it will check whether a
+	// default one can be located. If not, then it will return ##UNKNOWN##
+	//--------------------------------------------------------------------------
+	private string Get(string env, string key)
+	{
+		string returnVal = "";
+		IDictionary<string, string> param;
+		if (envParam.TryGetValue(env, out param))
+		{
+			if (!param.TryGetValue(key, out returnVal))
+			{
+				if (env == DEFAULT)
+				{
+					returnVal = "##UNKNOWN##";
+				}
+				else
+				{
+					return Get(DEFAULT, key);
+				}
+			}
+		}
+		else
+		{
+			return Get(DEFAULT, key);
+		}
+		
+		return returnVal;
+	}
+	
+	//--------------------------------------------------------------------------
+	// Helper function to set a parameter value for a given environment.
+	//--------------------------------------------------------------------------
+	private void Set(string env, string key, string value)
+	{
+		IDictionary<string, string> param;
+		if (!envParam.TryGetValue(env, out param))
+		{
+			param = new Dictionary<string, string>();
+			envParam[env] = param;
+		}
+
+		param[key] = value;
+	}
+	
+	//--------------------------------------------------------------------------
+	// Helper function to copy a parameter values from one environment to other.
+	//--------------------------------------------------------------------------
+	private void Copy(string env, string newEnv)
+	{
+		IDictionary<string, string> param;
+		IDictionary<string, string> newParam;
+		if (envParam.TryGetValue(env, out param))
+		{
+			if(!envParam.TryGetValue(newEnv, out newParam))
+			{
+				envParam[newEnv] = new Dictionary<string, string>(param);
+			}
+			else
+			{
+				foreach (var item in param)
+				{
+					newParam.Add(item);
+				}
+			}
+		}
+	}
+	
+	//--------------------------------------------------------------------------
+	// Helper function to save the current content generated in the template engine.
+	//--------------------------------------------------------------------------
+	private void SaveOutput(string outputFileName)
+	{
+		string templateDirectory = Path.GetDirectoryName(Host.TemplateFile);
+		string outputFilePath = Path.Combine(templateDirectory, outputFileName);
+		File.WriteAllText(outputFilePath, this.GenerationEnvironment.ToString()); 
+		
+		this.GenerationEnvironment.Remove(0, this.GenerationEnvironment.Length);
+	}
+#>

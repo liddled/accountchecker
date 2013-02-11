@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="DL.AccountChecker.Suite.WPF.TransactionEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:f="clr-namespace:DL.Framework.WPF;assembly=DL.Framework.WPF"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d"
+             DataContext="ViewModel"
+             d:DesignHeight="300" d:DesignWidth="500"
+             d:DataContext="{d:DesignData Source=../../DesignData/TransactionEditViewModel.xaml}">
+    <f:ContentCard Style="{StaticResource TransactionCard}">
+        <f:ContentCard.Header>
+            <Grid Style="{StaticResource TransactionCardHeader}">
+                <TextBlock Text="Transactions - Add" Style="{StaticResource TransactionCardHeaderTitle}" />
+            </Grid>
+        </f:ContentCard.Header>
+        <f:ContentCard.Content>
+            <Grid Style="{StaticResource TransactionCardContent}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">Account</Label>
+                    <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Height="20" Width="200" Text="" />
+
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">Unique Id</Label>
+                    <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Height="20" Width="100" Text="{Binding Path=UniqueId}" />
+
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">Date</Label>
+                    <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="20" Width="100" Text="{Binding Path=Date}" />
+
+                    <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right">Description</Label>
+                    <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Height="20" Width="100" Text="{Binding Path=Description}" />
+
+                    <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right">Amount</Label>
+                    <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Height="20" Width="100" Text="{Binding Path=Amount}" />
+
+                    <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right">Categories</Label>
+                    <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Height="20" Width="100" Text="{Binding Path=Categories}" />
+                </Grid>
+                
+                <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button Content="Save" Style="{StaticResource LeftButton}" CommandParameter="{Binding Transaction}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SaveCommand}" />
+                </StackPanel>
+            </Grid>
+        </f:ContentCard.Content>
+        <i:Interaction.Behaviors>
+            <f:ReflectionBehavior />
+        </i:Interaction.Behaviors>
+    </f:ContentCard>
+</UserControl>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<objects xmlns="http://www.springframework.net"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd">
+
+  <description>Definition of objects to be registered via Spring.</description>
+
+  <object id="accountRepository" type="DL.AccountChecker.Repositories.Sql.AccountRepository, DL.AccountChecker.Repositories.Sql">
+    <constructor-arg name="connectionString" value="${ConnectionString}" />
+  </object>
+
+  <object id="categoryRepository" type="DL.AccountChecker.Repositories.Sql.CategoryRepository, DL.AccountChecker.Repositories.Sql">
+    <constructor-arg name="connectionString" value="${ConnectionString}" />
+  </object>
+
+  <object id="idAllocationRepository" type="DL.AccountChecker.Repositories.Sql.IdAllocationRepository, DL.AccountChecker.Repositories.Sql">
+    <constructor-arg name="connectionString" value="${ConnectionString}" />
+  </object>
+
+  <object id="transactionRepository" type="DL.AccountChecker.Repositories.Sql.TransactionRepository, DL.AccountChecker.Repositories.Sql">
+    <constructor-arg name="connectionString" value="${ConnectionString}" />
+  </object>
+
+</objects>

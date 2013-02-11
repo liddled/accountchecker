@@ -1,0 +1,181 @@
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:g="clr-namespace:System.Globalization;assembly=mscorlib"
+    xmlns:m="clr-namespace:DL.AccountChecker.Model;assembly=DL.AccountChecker.Model"
+    xmlns:f="clr-namespace:DL.Framework.WPF;assembly=DL.Framework.WPF">
+
+    <Color x:Key="ReportCardBackgroundGradientStartColor">#D1E29C</Color>
+    <Color x:Key="ReportCardBackgroundGradientStopColor">#818C60</Color>
+    <SolidColorBrush x:Key="ReportCardTextColor" Color="{Binding Source={StaticResource WhiteColor}, Path=Color}" />
+
+    <SolidColorBrush x:Key="ReportBoxBackgroundColor" Color="#424241" />
+    <SolidColorBrush x:Key="ReportBoxBorderColor" Color="#424241" />
+    <Color x:Key="ReportBoxSelectedBackgroundGradientStartColor">#4D4F4F</Color>
+    <Color x:Key="ReportBoxSelectedBackgroundGradientStopColor">#2C2B29</Color>
+    <SolidColorBrush x:Key="ReportBoxSelectedBorderColor" Color="#323C19" />
+    <SolidColorBrush x:Key="ReportBoxHeadingColor" Color="{Binding Source={StaticResource WhiteColor}, Path=Color}" />
+    <SolidColorBrush x:Key="ReportBoxTextColor" Color="{Binding Source={StaticResource WhiteColor}, Path=Color}" />
+
+    <Style x:Key="ReportCard" TargetType="{x:Type f:ContentCard}" BasedOn="{StaticResource ContentCard}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="{StaticResource ReportCardBackgroundGradientStartColor}" Offset="0" />
+                            <GradientStop Color="{StaticResource ReportCardBackgroundGradientStopColor}" Offset="1" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ReportCardHeader" TargetType="Grid" BasedOn="{StaticResource CardHeader}">
+    </Style>
+
+    <Style x:Key="ReportCardHeaderTitle" TargetType="TextBlock" BasedOn="{StaticResource CardHeaderTitle}">
+    </Style>
+
+    <Style x:Key="ReportCardHeaderBreadcrumb" TargetType="Grid" BasedOn="{StaticResource CardHeaderBreadcrumb}">
+        <Setter Property="Background" Value="#A45507" />
+    </Style>
+
+    <Style x:Key="ReportCardContent" TargetType="Grid" BasedOn="{StaticResource CardContent}">
+    </Style>
+
+    <Style x:Key="ReportCardAddButton" TargetType="{x:Type Button}" BasedOn="{StaticResource LinkButton}">
+        <Setter Property="Foreground" Value="{StaticResource ReportCardTextColor}" />
+        <Setter Property="FontSize" Value="15" />
+    </Style>
+
+    <Style x:Key="ReportMenuButton" TargetType="{x:Type f:NavigationButton}">
+        <!--<Setter Property="Image" Value="pack://application:,,,/DL.AccountChecker.Suite.WPF;component/Content/Images/report_s.png" />-->
+    </Style>
+
+    <!-- ReportSummaryModel -->
+    <Style x:Key="ReportSummaryModelStyle" TargetType="ListBoxItem">
+        <Setter Property="Language" Value="{Binding Account.Locale, Converter={StaticResource languageConverter}, ConverterCulture={x:Static g:CultureInfo.InvariantCulture}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Box" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Box" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Box" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Box" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0"
+                                Name="ReportListBoxItemBorder"
+                                Style="{StaticResource ListBoxItemBorder}">
+                            <ContentPresenter />
+                        </Border>
+                        <Border Grid.Column="1"
+                                Background="{StaticResource ReportBoxBackgroundColor}"
+                                Style="{StaticResource BoxBorder}">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource BoxHeading}"
+                                           Foreground="{StaticResource ReportBoxHeadingColor}"
+                                           Text="{Binding HighestBalance, StringFormat={}{0:C}}" />
+                                <Separator Style="{StaticResource BoxSeparator}" />
+                                <TextBlock Style="{StaticResource BoxText}"
+                                           Foreground="{StaticResource ReportBoxTextColor}"
+                                           Text="Highest Balance" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="2"
+                                Background="{StaticResource ReportBoxBackgroundColor}"
+                                Style="{StaticResource BoxBorder}">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource BoxHeading}"
+                                           Foreground="{StaticResource ReportBoxHeadingColor}"
+                                           Text="{Binding LowestBalance, StringFormat={}{0:C}}" />
+                                <Separator Style="{StaticResource BoxSeparator}" />
+                                <TextBlock Style="{StaticResource BoxText}"
+                                           Foreground="{StaticResource ReportBoxTextColor}"
+                                           Text="Lowest Balance" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="3"
+                                Background="{StaticResource ReportBoxBackgroundColor}"
+                                Style="{StaticResource BoxBorder}">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource BoxHeading}"
+                                           Foreground="{StaticResource ReportBoxHeadingColor}"
+                                           Text="{Binding Change, StringFormat={}{0:C}}" />
+                                <Separator Style="{StaticResource BoxSeparator}" />
+                                <TextBlock Style="{StaticResource BoxText}"
+                                           Foreground="{StaticResource ReportBoxTextColor}"
+                                           Text="Change" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="4"
+                                Background="{StaticResource ReportBoxBackgroundColor}"
+                                Style="{StaticResource BoxBorder}">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource BoxHeading}"
+                                           Foreground="{StaticResource ReportBoxHeadingColor}"
+                                           Text="{Binding ChangePercentage, StringFormat={}{0:C}}" />
+                                <Separator Style="{StaticResource BoxSeparator}" />
+                                <TextBlock Style="{StaticResource BoxText}"
+                                           Foreground="{StaticResource ReportBoxTextColor}"
+                                           Text="% Chg." />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="false">
+                            <Setter TargetName="ReportListBoxItemBorder" Property="Background" Value="{StaticResource ReportBoxBackgroundColor}" />
+                            <Setter TargetName="ReportListBoxItemBorder" Property="BorderBrush" Value="{StaticResource ReportBoxBorderColor}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="ReportListBoxItemBorder" Property="BorderBrush" Value="{StaticResource ReportBoxSelectedBorderColor}" />
+                            <Setter TargetName="ReportListBoxItemBorder" Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="{StaticResource ReportBoxSelectedBackgroundGradientStartColor}" Offset="0" />
+                                                <GradientStop Color="{StaticResource ReportBoxSelectedBackgroundGradientStopColor}" Offset="1" />
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ReportListBoxItemBorder" Property="BorderBrush" Value="{StaticResource ReportBoxSelectedBorderColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="f:CommandBehavior.Event" Value="MouseDoubleClick" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.EditCommand}" />
+        <Setter Property="f:CommandBehavior.CommandParameter" Value="{Binding Report}" />
+    </Style>
+
+    <DataTemplate x:Key="ReportSummaryModelTemplate" DataType="{x:Type m:ReportSummaryModel}">
+        <Grid Margin="10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Image Grid.Column="0"
+                   Margin="0,0,10,0"
+                   Source="pack://application:,,,/DL.AccountChecker.Suite.WPF;component/Content/Images/report_s.png" />
+            <TextBlock Grid.Column="1"
+                       FontSize="14"
+                       Foreground="{StaticResource ReportBoxTextColor}"
+                       Text="{Binding Account.BankName}" />
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

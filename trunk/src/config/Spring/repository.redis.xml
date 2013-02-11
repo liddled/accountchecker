@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<objects xmlns="http://www.springframework.net"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd">
+
+  <description>Definition of objects to be registered via Spring.</description>
+
+  <object id="redisManager" type="ServiceStack.Redis.PooledRedisClientManager, ServiceStack.Redis">
+  </object>
+    
+  <object id="accountRepository" type="DL.AccountChecker.Repositories.Redis.AccountRepository, DL.AccountChecker.Repositories.Redis">
+    <constructor-arg name="redisManager" ref="redisManager" />
+  </object>
+
+  <object id="categoryRepository" type="DL.AccountChecker.Repositories.Redis.CategoryRepository, DL.AccountChecker.Repositories.Redis">
+    <constructor-arg name="redisManager" ref="redisManager" />
+  </object>
+
+  <object id="idAllocationRepository" type="DL.AccountChecker.Repositories.Redis.IdAllocationRepository, DL.AccountChecker.Repositories.Redis">
+    <constructor-arg name="redisManager" ref="redisManager" />
+  </object>
+
+  <object id="transactionRepository" type="DL.AccountChecker.Repositories.Redis.TransactionRepository, DL.AccountChecker.Repositories.Redis">
+    <constructor-arg name="redisManager" ref="redisManager" />
+  </object>
+
+</objects>

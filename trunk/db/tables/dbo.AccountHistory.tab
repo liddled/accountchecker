@@ -1,0 +1,11 @@
+create table [dbo].[ACCOUNT_HISTORY]
+(
+	ACCOUNT_ID bigint not null,
+	BANK_NAME nvarchar(30) not null,
+	BANK_CODE nvarchar(30) not null,
+	CARD_NUMBER nvarchar(15) not null,
+	LOCALE nvarchar(5) not null,
+	[STATUS] nvarchar(20) not null,
+	MODIFIED datetime not null
+)
+go

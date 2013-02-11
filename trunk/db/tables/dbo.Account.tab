@@ -1,0 +1,17 @@
+create table [dbo].[ACCOUNT]
+(
+	ACCOUNT_ID bigint not null,
+	BANK_NAME nvarchar(30) not null,
+	BANK_CODE nvarchar(30) not null,
+	CARD_NUMBER nvarchar(15) not null,
+	LOCALE nvarchar(5) not null,
+	[STATUS] nvarchar(20) not null
+)
+go
+
+alter table [dbo].[ACCOUNT]
+	add constraint PK_ACCOUNT primary key nonclustered
+	(
+		ACCOUNT_ID
+	)
+go

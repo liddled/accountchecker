@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="DL.AccountChecker.Suite.WPF.TransactionHistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:g="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:f="clr-namespace:DL.Framework.WPF;assembly=DL.Framework.WPF"
+             mc:Ignorable="d"
+             DataContext="ViewModel"
+             Language="{Binding TransactionHistory.Account.Locale, Converter={StaticResource languageConverter}, ConverterCulture={x:Static g:CultureInfo.InvariantCulture}}"
+             d:DataContext="{d:DesignData Source=../../DesignData/TransactionHistoryViewModel.xaml}"
+             d:DesignHeight="200" d:DesignWidth="500">
+    <f:ContentCard Style="{StaticResource TransactionCard}">
+        <f:ContentCard.Header>
+            <Grid Style="{StaticResource TransactionCardHeader}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Source="pack://application:,,,/DL.AccountChecker.Suite.WPF;component/Content/Images/transaction_l.png"
+                       Height="46" Width="42"
+                       Margin="10,0"/>
+                <StackPanel Grid.Column="1"
+                            Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding TransactionHistory.Account.BankName}" Style="{StaticResource TransactionCardHeaderSubTitle}" />
+                    <TextBlock Text="Transaction History" Style="{StaticResource TransactionCardHeaderTitle}" />
+                </StackPanel>
+            </Grid>
+        </f:ContentCard.Header>
+        <f:ContentCard.Content>
+            <Grid Style="{StaticResource TransactionCardContent}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock FontSize="12">
+                            <Run Text="Transactions: "/><Run Style="{StaticResource TransactionHistoryTransactionStyle}" Text="{Binding Path=TransactionHistory.TransactionCount}" /><Run Text=","/>
+                            <Run Text="Net: " /><Run Style="{StaticResource TransactionHistoryNetStyle}" Text="{Binding Path=TransactionHistory.Net, Mode=OneWay, StringFormat={}{0:C}}" /><Run Text=","/>
+                            <Run Text="Outcome: " /><Run Style="{StaticResource TransactionHistoryOutcomeStyle}" Text="{Binding Path=TransactionHistory.Outcome, StringFormat={}{0:C}}" /><Run Text=","/>
+                            <Run Text="Income: " /><Run Style="{StaticResource TransactionHistoryIncomeStyle}" Text="{Binding Path=TransactionHistory.Income, StringFormat={}{0:C}}" />
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                        <TextBlock DataContext="{Binding Path=TransactionHistory}" Text="&#171;" Style="{StaticResource TransactionHistoryLeftArrowStyle}" />
+                        <TextBlock DataContext="{Binding Path=TransactionHistory}" FontSize="18" Margin="5,0" Text="{Binding Converter={StaticResource busDateConverter}, ConverterParameter='Date|DateView'}" />
+                        <TextBlock DataContext="{Binding Path=TransactionHistory}" Text="&#187;" Style="{StaticResource TransactionHistoryRightArrowStyle}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Text="&#187; View Reports" Style="{StaticResource TransactionHistoryViewReportsStyle}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <ComboBox ItemsSource="{Binding DateViewEnumValues}"
+                                  Style="{StaticResource TransactionHistorySortComboBox}"
+                                  SelectedValue="{Binding Path=SortByDateViewSelectedItem, Mode=TwoWay}" />
+                        <ComboBox ItemsSource="{Binding StatusEnumValues}"
+                                  Style="{StaticResource TransactionHistorySortComboBox}"
+                                  SelectedValue="{Binding Path=SortByStatusSelectedItem, Mode=TwoWay}" />
+                    </StackPanel>
+
+                    <ListBox Grid.Row="2" Grid.Column="0"
+                             ItemsSource="{Binding TransactionHistory.Categories}"
+                             ItemContainerStyle="{StaticResource TransactionCategoryStyle}"
+                             Style="{StaticResource TransactionCategoryListStyle}" />
+                </Grid>
+
+                <Border Grid.Row="3" Style="{StaticResource TransactionHistoryGridBorderStyle}">
+                    <Grid>
+                        <Border x:Name="mask" Background="#1E4B6F" BorderThickness="0" CornerRadius="3"/>
+                        <DataGrid ItemsSource="{Binding Path=TransactionHistory.Transactions}"
+                                  Style="{StaticResource TransactionHistoryGridStyle}"
+                                  ColumnHeaderStyle="{StaticResource TransactionHistoryGridColumnStyle}"
+                                  RowStyle="{StaticResource TransactionHistoryGridRowStyle}"
+                                  CellStyle="{StaticResource TransactionHistoryGridCellStyle}">
+                            <DataGrid.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=mask}"/>
+                            </DataGrid.OpacityMask>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Date" SortMemberPath="Date">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock DataContext="{Binding Date.DateTime}" Style="{StaticResource TransactionHistoryGridCellViewDayStyle}" Text="{Binding Mode=OneWay, StringFormat='{}{0:ddd dd}'}" />
+                                                <TextBlock DataContext="{Binding Date.DateTime}" Style="{StaticResource TransactionHistoryGridCellViewMonthStyle}" Text="{Binding Mode=OneWay, StringFormat='{}{0:MMM}'}" Margin="3,0" />
+                                                <TextBlock DataContext="{Binding Date.DateTime}" Style="{StaticResource TransactionHistoryGridCellViewYearStyle}" Text="{Binding Mode=OneWay, StringFormat='{}{0:yyyy}'}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Categories" IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ListBox ItemsSource="{Binding Categories}"
+                                                     ItemContainerStyle="{StaticResource TransactionCategoryStyle}"
+                                                     Style="{StaticResource TransactionCategoryListStyle}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Description" Width="*" IsReadOnly="True" SortMemberPath="Description">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Description}" Style="{StaticResource TransactionHistoryGridCellDescriptionStyle}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Amount" IsReadOnly="True" SortMemberPath="Amount">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Amount, StringFormat={}{0:C}}" Style="{StaticResource TransactionHistoryGridCellAmountStyle}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{StaticResource TransactionExcludeIncludeButtonStyle}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </f:ContentCard.Content>
+        <i:Interaction.Behaviors>
+            <f:ReflectionBehavior />
+        </i:Interaction.Behaviors>
+    </f:ContentCard>
+</UserControl>

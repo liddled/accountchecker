@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="DL.AccountChecker.Suite.WPF.MenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:f="clr-namespace:DL.Framework.WPF;assembly=DL.Framework.WPF"
+             Style="{DynamicResource MenuStyle}"
+             DataContext="ViewModel">
+    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+        <f:NavigationButton Content="Accounts" Command="{Binding AccountsCommand}" Image="pack://application:,,,/DL.AccountChecker.Suite.WPF;component/Content/Images/account_l.png" />
+        <f:NavigationButton Content="Transactions" Command="{Binding TransactionsCommand}" Image="pack://application:,,,/DL.AccountChecker.Suite.WPF;component/Content/Images/transaction_l.png" />
+        <f:NavigationButton Content="Reports" Command="{Binding ReportsCommand}" Image="pack://application:,,,/DL.AccountChecker.Suite.WPF;component/Content/Images/report_l.png" />
+        <f:NavigationButton Content="Categories" Command="{Binding CategoriesCommand}" Image="pack://application:,,,/DL.AccountChecker.Suite.WPF;component/Content/Images/category_l.png" />
+    </StackPanel>
+</UserControl>

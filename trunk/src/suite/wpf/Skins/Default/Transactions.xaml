@@ -1,0 +1,397 @@
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:g="clr-namespace:System.Globalization;assembly=mscorlib"
+    xmlns:d="clr-namespace:DL.AccountChecker.Domain;assembly=DL.AccountChecker.Domain"
+    xmlns:m="clr-namespace:DL.AccountChecker.Model;assembly=DL.AccountChecker.Model"
+    xmlns:f="clr-namespace:DL.Framework.WPF;assembly=DL.Framework.WPF">
+    
+    <Color x:Key="TransactionCardBackgroundGradientStartColor">#F3FAFC</Color>
+    <Color x:Key="TransactionCardBackgroundGradientStopColor">#A7BCCD</Color>
+    <SolidColorBrush x:Key="TransactionCardTextColor" Color="#21182E" />
+    <SolidColorBrush x:Key="TransactionCardLinkColor" Color="#5594FE" />
+    
+    <SolidColorBrush x:Key="TransactionBoxBackgroundColor" Color="#424241" />
+    <SolidColorBrush x:Key="TransactionBoxBorderColor" Color="#424241" />
+    <Color x:Key="TransactionBoxSelectedBackgroundGradientStartColor">#4D4F4F</Color>
+    <Color x:Key="TransactionBoxSelectedBackgroundGradientStopColor">#2C2B29</Color>
+    <SolidColorBrush x:Key="TransactionBoxSelectedBorderColor" Color="#AF4E14" />
+    <SolidColorBrush x:Key="TransactionBoxHeadingColor" Color="{Binding Source={StaticResource WhiteColor}, Path=Color}" />
+    <SolidColorBrush x:Key="TransactionBoxTextColor" Color="{Binding Source={StaticResource WhiteColor}, Path=Color}" />
+
+    <SolidColorBrush x:Key="TransactionHistoryGridBorderColor" Color="#D7D7D7" />
+
+    <Style x:Key="TransactionCard" TargetType="{x:Type f:ContentCard}" BasedOn="{StaticResource ContentCard}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="{StaticResource TransactionCardBackgroundGradientStartColor}" Offset="0" />
+                            <GradientStop Color="{StaticResource TransactionCardBackgroundGradientStopColor}" Offset="1" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{StaticResource TransactionCardTextColor}" />
+    </Style>
+
+    <Style x:Key="TransactionCardHeader" TargetType="Grid" BasedOn="{StaticResource CardHeader}">
+    </Style>
+    
+    <Style x:Key="TransactionCardHeaderTitle" TargetType="TextBlock" BasedOn="{StaticResource CardHeaderTitle}">
+    </Style>
+
+    <Style x:Key="TransactionCardHeaderSubTitle" TargetType="TextBlock" BasedOn="{StaticResource CardHeaderSubTitle}">
+    </Style>
+
+    <Style x:Key="TransactionCardContent" TargetType="Grid" BasedOn="{StaticResource CardContent}">
+    </Style>
+
+    <Style x:Key="TransactionCardAddButton" TargetType="{x:Type Button}" BasedOn="{StaticResource LinkButton}">
+        <Setter Property="FontSize" Value="15" />
+    </Style>
+
+    <Style x:Key="TransactionMenuButton" TargetType="{x:Type f:NavigationButton}">
+        <!--<Setter Property="Image" Value="pack://application:,,,/DL.AccountChecker.Suite.WPF;component/Content/Images/transaction_s.png" />-->
+    </Style>
+
+    <!-- TransactionSummaryModel -->
+    <Style x:Key="TransactionSummaryModelStyle" TargetType="ListBoxItem">
+        <Setter Property="Language" Value="{Binding Account.Locale, Converter={StaticResource languageConverter}, ConverterCulture={x:Static g:CultureInfo.InvariantCulture}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Box" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Box" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Box" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Box" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0"
+                                Name="TransactionListBoxItemBorder"
+                                Style="{StaticResource ListBoxItemBorder}">
+                            <ContentPresenter />
+                        </Border>
+                        <Border Grid.Column="1"
+                                Background="{StaticResource TransactionBoxBackgroundColor}"
+                                Style="{StaticResource BoxBorder}">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource BoxHeading}"
+                                           Foreground="{StaticResource TransactionBoxHeadingColor}"
+                                           Text="{Binding TransactionCount}" />
+                                <Separator Style="{StaticResource BoxSeparator}" />
+                                <TextBlock Style="{StaticResource BoxText}"
+                                           Foreground="{StaticResource TransactionBoxTextColor}"
+                                           Text="Monthly Trans." />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="2"
+                                Background="{StaticResource TransactionBoxBackgroundColor}"
+                                Style="{StaticResource BoxBorder}">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource BoxHeading}"
+                                           Foreground="{StaticResource TransactionBoxHeadingColor}"
+                                           Text="{Binding Net, StringFormat={}{0:C}}" />
+                                <Separator Style="{StaticResource BoxSeparator}" />
+                                <TextBlock Style="{StaticResource BoxText}"
+                                           Foreground="{StaticResource TransactionBoxTextColor}"
+                                           Text="Monthly Net" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="3"
+                                Background="{StaticResource TransactionBoxBackgroundColor}"
+                                Style="{StaticResource BoxBorder}">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource BoxHeading}"
+                                           Foreground="{StaticResource TransactionBoxHeadingColor}"
+                                           Text="{Binding Outcome, StringFormat={}{0:C}}" />
+                                <Separator Style="{StaticResource BoxSeparator}" />
+                                <TextBlock Style="{StaticResource BoxText}"
+                                           Foreground="{StaticResource TransactionBoxTextColor}"
+                                           Text="Monthly Outcome" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="4"
+                                Background="{StaticResource TransactionBoxBackgroundColor}"
+                                Style="{StaticResource BoxBorder}">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource BoxHeading}"
+                                           Foreground="{StaticResource TransactionBoxHeadingColor}"
+                                           Text="{Binding Income, StringFormat={}{0:C}}" />
+                                <Separator Style="{StaticResource BoxSeparator}" />
+                                <TextBlock Style="{StaticResource BoxText}"
+                                           Foreground="{StaticResource TransactionBoxTextColor}"
+                                           Text="Monthly Income" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="TransactionListBoxItemBorder" Property="Background" Value="{StaticResource TransactionBoxBackgroundColor}" />
+                            <Setter TargetName="TransactionListBoxItemBorder" Property="BorderBrush" Value="{StaticResource TransactionBoxBorderColor}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="TransactionListBoxItemBorder" Property="BorderBrush" Value="{StaticResource TransactionBoxSelectedBorderColor}" />
+                            <Setter TargetName="TransactionListBoxItemBorder" Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="{StaticResource TransactionBoxSelectedBackgroundGradientStartColor}" Offset="0" />
+                                                <GradientStop Color="{StaticResource TransactionBoxSelectedBackgroundGradientStopColor}" Offset="1" />
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="TransactionListBoxItemBorder" Property="BorderBrush" Value="{StaticResource TransactionBoxSelectedBorderColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="f:CommandBehavior.Event" Value="MouseDoubleClick" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ViewHistoryCommand}" />
+        <Setter Property="f:CommandBehavior.CommandParameter" Value="{Binding Account.AccountId}" />
+    </Style>
+
+    <DataTemplate x:Key="TransactionSummaryModelTemplate" DataType="{x:Type m:TransactionSummaryModel}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Image Grid.Column="0"
+                   Margin="10,0"
+                   Source="pack://application:,,,/DL.AccountChecker.Suite.WPF;component/Content/Images/transaction_s.png" />
+            <StackPanel Grid.Column="1"
+                        Orientation="Vertical" VerticalAlignment="Center">
+                <TextBlock FontSize="14" Foreground="{StaticResource TransactionBoxTextColor}"
+                           Text="{Binding Account.BankName}" />
+                <Separator Style="{StaticResource ItemSeparator}" />
+                <TextBlock Foreground="{StaticResource GreyColor}">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="Start Balance: {0:C}, Current Balance: {1:C}">
+                            <Binding Path="StartBalance"></Binding>
+                            <Binding Path="CurrentBalance"></Binding>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <Style x:Key="TransactionHistoryLargeFontStyle" TargetType="{x:Type Run}">
+        <Setter Property="FontSize" Value="18" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryTransactionStyle" TargetType="{x:Type Run}" BasedOn="{StaticResource TransactionHistoryLargeFontStyle}">
+        <Setter Property="Foreground" Value="{StaticResource DarkGreyColor}" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryNetStyle" TargetType="{x:Type Run}" BasedOn="{StaticResource TransactionHistoryLargeFontStyle}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding TransactionHistory.Net, Converter={StaticResource isEqualOrGreaterThanConverter}, ConverterParameter=0}" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource IncomeColor}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding TransactionHistory.Net, Converter={StaticResource isEqualOrGreaterThanConverter}, ConverterParameter=0}" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource OutcomeColor}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TransactionHistoryOutcomeStyle" TargetType="{x:Type Run}" BasedOn="{StaticResource TransactionHistoryLargeFontStyle}">
+        <Setter Property="Foreground" Value="{StaticResource OutcomeColor}" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryIncomeStyle" TargetType="{x:Type Run}" BasedOn="{StaticResource TransactionHistoryLargeFontStyle}">
+        <Setter Property="Foreground" Value="{StaticResource IncomeColor}" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryLeftArrowStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockArrow}">
+        <Setter Property="Foreground" Value="{StaticResource TransactionCardLinkColor}" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.PreviousHistoryCommand}" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryRightArrowStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockArrow}">
+        <Setter Property="Foreground" Value="{StaticResource TransactionCardLinkColor}" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.NextHistoryCommand}" />
+    </Style>
+
+    <Style x:Key="TransactionHistorySortComboBox" TargetType="{x:Type ComboBox}">
+        <Setter Property="MinWidth" Value="60"/>
+        <Setter Property="UIElement.SnapsToDevicePixels" Value="True"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+        <Setter Property="TextElement.Foreground" Value="Black"/>
+        <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <!--<Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Path x:Name="Arrow" Fill="White"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>-->
+        <!--<Setter Property="f:CommandBehavior.Event" Value="SelectionChanged" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SortCommand, Mode=OneWay}" />
+        <Setter Property="f:CommandBehavior.CommandParameter" Value="{Binding SelectedItem}" />-->
+    </Style>
+
+    <Style x:Key="TransactionHistoryViewReportsStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockLink}">
+        <Setter Property="Foreground" Value="{StaticResource TransactionCardLinkColor}" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ViewReportsCommand}" />
+    </Style>
+    
+    <Style x:Key="TransactionHistoryGridStyle" TargetType="{x:Type DataGrid}">
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="GridLinesVisibility" Value="Horizontal" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+        <Setter Property="Foreground" Value="{StaticResource TransactionCardTextColor}" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource TransactionHistoryGridBorderColor}" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryGridBorderStyle" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="{StaticResource TransactionHistoryGridBorderColor}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="5" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryGridColumnStyle" TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.1,1" StartPoint="0.1,0">
+                    <GradientStop Color="#F8F8F8" Offset="0"/>
+                    <GradientStop Color="#D8D8D8" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{StaticResource BlackColor}" />
+        <Setter Property="Padding" Value="8" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryGridRowStyle" TargetType="{x:Type DataGridRow}">
+        <Setter Property="Background" Value="#FAFAFA" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryGridCellStyle" TargetType="{x:Type DataGridCell}">
+        <Setter Property="Foreground" Value="{StaticResource TransactionCardTextColor}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" Margin="8, 2" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{x:Null}" />
+                <Setter Property="BorderBrush" Value="{x:Null}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TransactionHistoryGridCellViewDayStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockLink}">
+        <Setter Property="Foreground" Value="{StaticResource TransactionCardLinkColor}" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.DateViewDayHistoryCommand}" />
+        <Setter Property="f:CommandBehavior.CommandParameter" Value="{Binding}" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryGridCellViewMonthStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockLink}">
+        <Setter Property="Foreground" Value="{StaticResource TransactionCardLinkColor}" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.DateViewMonthHistoryCommand}" />
+        <Setter Property="f:CommandBehavior.CommandParameter" Value="{Binding}" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryGridCellViewYearStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockLink}">
+        <Setter Property="Foreground" Value="{StaticResource TransactionCardLinkColor}" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.DateViewYearHistoryCommand}" />
+        <Setter Property="f:CommandBehavior.CommandParameter" Value="{Binding}" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryGridCellDescriptionStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockLink}">
+        <Setter Property="Foreground" Value="{StaticResource TransactionCardLinkColor}" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.EditTransactionCommand}" />
+        <Setter Property="f:CommandBehavior.CommandParameter" Value="{Binding TransactionId}" />
+    </Style>
+
+    <Style x:Key="TransactionHistoryGridCellAmountStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Info.Excluded}" Value="True">
+                <Setter Property="TextDecorations" Value="Strikethrough" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Amount, Converter={StaticResource isEqualOrGreaterThanConverter}, ConverterParameter=0}" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource IncomeColor}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Amount, Converter={StaticResource isEqualOrGreaterThanConverter}, ConverterParameter=0}" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource OutcomeColor}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TransactionCategoryElipseButtonStyle" TargetType="Button" BasedOn="{StaticResource ElipseButtonStyle}">
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Margin" Value="0,0,3,0" />
+    </Style>
+
+    <Style x:Key="TransactionCategoryListStyle" TargetType="ListBox">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="TransactionCategoryStyle" TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Button Content="{Binding CategoryName}" Style="{StaticResource TransactionCategoryElipseButtonStyle}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="f:CommandBehavior.Event" Value="PreviewMouseDown" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding Path=DataContext.CategoryHistoryCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
+        <Setter Property="f:CommandBehavior.CommandParameter" Value="{Binding CategoryName}" />
+    </Style>
+
+    <Style x:Key="TransactionExcludeIncludeButtonStyle" TargetType="Button" BasedOn="{StaticResource ExcludeIncludeButtonStyle}">
+        <Setter Property="DataContext" Value="{Binding Info.Excluded}" />
+        <Setter Property="f:CommandBehavior.Event" Value="MouseDoubleClick" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding Path=DataContext.ExcludeIncludeTransactionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
+        <Setter Property="f:CommandBehavior.CommandParameter" Value="{Binding TransactionId}" />
+    </Style>
+
+</ResourceDictionary>

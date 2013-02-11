@@ -1,0 +1,54 @@
+<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>DL - Account Checker</title>
+    <base href="<%: Url.BaseUrl() %>/" />
+    <link href="<%: Url.Content("~/content/images/favicon.ico") %>" rel="shortcut icon" type="image/x-icon" />
+    <!--<link href="<%: BundleTable.Bundles.ResolveBundleUrl("~/css") %>" rel="stylesheet" type="text/css" />-->
+    <link href="<%: Url.Content("~/content/site.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%: Url.Content("~/content/ui.css") %>" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="<%: BundleTable.Bundles.ResolveBundleUrl("~/scripts") %>"></script>
+    <script type="text/javascript">
+        $(function ()
+        {
+            var subscriptionController = $.connection.subscriptionController;
+
+            // Declare a function on the eventHub so the server can invoke it
+            subscriptionController.cacheUpdate = function (cu)
+            {
+                ProcessCacheUpdate(cu);
+            }
+
+            //callback that does nothing, simply here to establish link to Hub
+            /*subscriptionController.registerCallback = function ()
+            {
+            };
+
+            // Start the connection
+            $.connection.hub.start();
+
+            //wait for 3s before we register with Hub
+            window.setTimeout(function ()
+            {
+                subscriptionController.register();
+            }, 3000)*/
+        });
+
+        function ProcessCacheUpdate(cu)
+        {
+            alert('ok');
+        }
+    </script>
+</head>
+<body>
+    <% Html.RenderPartial("Header"); %>
+    <div id="page" class="content">
+        <div id="<%: Html.Theme() %>" class="inner">
+            <asp:ContentPlaceHolder ID="content" runat="server" />
+        </div>
+    </div>
+    <asp:ContentPlaceHolder ID="scripts" runat="server" />
+</body>
+</html>

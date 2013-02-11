@@ -1,0 +1,8 @@
+create table [dbo].[CATEGORY_HISTORY]
+(
+	CATEGORY_ID bigint not null,
+	CATEGORY_NAME nvarchar(30) not null,
+	[STATUS] nvarchar(20) not null,
+	MODIFIED datetime not null
+)
+go

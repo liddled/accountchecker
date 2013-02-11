@@ -1,0 +1,7 @@
+﻿<f:AccountEditViewModel xmlns:f="clr-namespace:DL.AccountChecker.Suite.WPF"
+                        xmlns:m="clr-namespace:DL.AccountChecker.Model;assembly=DL.AccountChecker.Model"
+                        xmlns:d="clr-namespace:DL.AccountChecker.Domain;assembly=DL.AccountChecker.Domain">
+    <f:AccountEditViewModel.Account>
+        <d:Account BankName="HSBC - GREEN BK A/C" BankCode="40-03-00" CardNumber="90006122" Locale="en-GB" />
+    </f:AccountEditViewModel.Account>
+</f:AccountEditViewModel>

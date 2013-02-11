@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<objects xmlns="http://www.springframework.net"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd">
+
+  <description>Definition of objects to be registered via Spring.</description>
+  
+  <object id="categoryManager" type="DL.AccountChecker.BusinessLogic.CategoryManager, DL.AccountChecker.BusinessLogic">
+    <constructor-arg name="categoryRepository" ref="categoryRepository" />
+  </object>
+
+  <object id="categoryManagerFactory" type="DL.AccountChecker.BusinessLogic.CategoryManagerFactory, DL.AccountChecker.BusinessLogic">
+    <constructor-arg name="cachedTypes" ref="cachedTypes" />
+    <constructor-arg name="categoryManager" ref="categoryManager" />
+    <constructor-arg name="idAllocationManager" ref="idAllocationManager" />
+  </object>
+
+</objects>

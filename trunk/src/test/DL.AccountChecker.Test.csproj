@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9C6878ED-17E3-4609-95E9-515815BAB15B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DL.AccountChecker.Test</RootNamespace>
+    <AssemblyName>DL.AccountChecker.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\..\dependencies\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <None Include="Data\OFX\valid-wellformed.ofx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\OFX\valid-nonwellformed.ofx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Compile Include="TransactionLoaderTest.cs" />
+    <Compile Include="MoqExtensions.cs" />
+    <Compile Include="OfxTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\trunk\src\framework\common\DL.Framework.Common.csproj">
+      <Project>{d9db2f88-049d-4846-8f89-c8219dd422bd}</Project>
+      <Name>DL.Framework.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\framework\trunk\src\framework\ofx\DL.Framework.OFX.csproj">
+      <Project>{426fda4a-d8ff-4f6b-bb82-a80e8bfef6cb}</Project>
+      <Name>DL.Framework.OFX</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\businesslogic\DL.AccountChecker.BusinessLogic.csproj">
+      <Project>{51dd3219-67e8-4bf0-bda8-44408b05b79e}</Project>
+      <Name>DL.AccountChecker.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\domain\DL.AccountChecker.Domain.csproj">
+      <Project>{7cd0d295-0d79-4c0c-bfec-7c3aa5df95bb}</Project>
+      <Name>DL.AccountChecker.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\framework\DL.AccountChecker.Framework.csproj">
+      <Project>{d6b739d0-15d0-4de1-b52b-3d43e7f557a1}</Project>
+      <Name>DL.AccountChecker.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\repositories\sql\DL.AccountChecker.Repositories.Sql.csproj">
+      <Project>{0723b0df-741b-4754-804c-00a004f1a096}</Project>
+      <Name>DL.AccountChecker.Repositories.Sql</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

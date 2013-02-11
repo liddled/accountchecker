@@ -1,0 +1,147 @@
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:m="clr-namespace:DL.AccountChecker.Model;assembly=DL.AccountChecker.Model"
+    xmlns:f="clr-namespace:DL.Framework.WPF;assembly=DL.Framework.WPF">
+
+    <Color x:Key="CategoryCardBackgroundGradientStartColor">#FFE9A8</Color>
+    <Color x:Key="CategoryCardBackgroundGradientStopColor">#FECC35</Color>
+    <SolidColorBrush x:Key="CategoryCardTextColor" Color="{Binding Source={StaticResource BlackColor}, Path=Color}" />
+
+    <SolidColorBrush x:Key="CategoryBoxBackgroundColor" Color="#424241" />
+    <SolidColorBrush x:Key="CategoryBoxBorderColor" Color="#424241" />
+    <Color x:Key="CategoryBoxSelectedBackgroundGradientStartColor">#4D4F4F</Color>
+    <Color x:Key="CategoryBoxSelectedBackgroundGradientStopColor">#2C2B29</Color>
+    <SolidColorBrush x:Key="CategoryBoxSelectedBorderColor" Color="#FFE32D" />
+    <SolidColorBrush x:Key="CategoryBoxHeadingColor" Color="{Binding Source={StaticResource WhiteColor}, Path=Color}" />
+    <SolidColorBrush x:Key="CategoryBoxTextColor" Color="{Binding Source={StaticResource WhiteColor}, Path=Color}" />
+
+    <Style x:Key="CategoryCard" TargetType="{x:Type f:ContentCard}" BasedOn="{StaticResource ContentCard}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="{StaticResource CategoryCardBackgroundGradientStartColor}" Offset="0" />
+                            <GradientStop Color="{StaticResource CategoryCardBackgroundGradientStopColor}" Offset="1" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CategoryCardHeader" TargetType="Grid" BasedOn="{StaticResource CardHeader}">
+    </Style>
+
+    <Style x:Key="CategoryCardHeaderTitle" TargetType="TextBlock" BasedOn="{StaticResource CardHeaderTitle}">
+    </Style>
+
+    <Style x:Key="CategoryCardHeaderBreadcrumb" TargetType="Grid" BasedOn="{StaticResource CardHeaderBreadcrumb}">
+        <Setter Property="Background" Value="#A45507" />
+    </Style>
+
+    <Style x:Key="CategoryCardContent" TargetType="Grid" BasedOn="{StaticResource CardContent}">
+    </Style>
+
+    <Style x:Key="CategoryCardAddButton" TargetType="{x:Type Button}" BasedOn="{StaticResource LinkButton}">
+        <Setter Property="Foreground" Value="{StaticResource CategoryCardTextColor}" />
+        <Setter Property="FontSize" Value="15" />
+    </Style>
+
+    <Style x:Key="CategoryMenuButton" TargetType="{x:Type f:NavigationButton}">
+        <!--<Setter Property="Image" Value="pack://application:,,,/DL.AccountChecker.Suite.WPF;component/Content/Images/category_s.png" />-->
+    </Style>
+
+    <!-- CategorySummaryModel -->
+    <Style x:Key="CategorySummaryModelStyle" TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Box" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0"
+                                Name="CategoryListBoxItemBorder"
+                                Style="{StaticResource ListBoxItemBorder}">
+                            <ContentPresenter />
+                        </Border>
+                        <Border Grid.Column="1"
+                                Background="{StaticResource CategoryBoxBackgroundColor}"
+                                Style="{StaticResource BoxBorder}">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource BoxHeading}"
+                                           Foreground="{StaticResource CategoryBoxHeadingColor}"
+                                           Text="{Binding Categories.Count}" />
+                                <Separator Style="{StaticResource BoxSeparator}" />
+                                <TextBlock Style="{StaticResource BoxText}"
+                                           Foreground="{StaticResource CategoryBoxTextColor}"
+                                           Text="Categories" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="false">
+                            <Setter TargetName="CategoryListBoxItemBorder" Property="Background" Value="{StaticResource CategoryBoxBackgroundColor}" />
+                            <Setter TargetName="CategoryListBoxItemBorder" Property="BorderBrush" Value="{StaticResource CategoryBoxBorderColor}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="CategoryListBoxItemBorder" Property="BorderBrush" Value="{StaticResource CategoryBoxSelectedBorderColor}" />
+                            <Setter TargetName="CategoryListBoxItemBorder" Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="{StaticResource CategoryBoxSelectedBackgroundGradientStartColor}" Offset="0" />
+                                                <GradientStop Color="{StaticResource CategoryBoxSelectedBackgroundGradientStopColor}" Offset="1" />
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="CategoryListBoxItemBorder" Property="BorderBrush" Value="{StaticResource CategoryBoxSelectedBorderColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="f:CommandBehavior.Event" Value="MouseDoubleClick" />
+        <Setter Property="f:CommandBehavior.Command" 
+                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.EditCommand}" />
+        <Setter Property="f:CommandBehavior.CommandParameter" Value="{Binding Category}" />
+    </Style>
+
+    <DataTemplate x:Key="CategorySummaryModelTemplate" DataType="{x:Type m:CategorySummaryModel}">
+        <Grid Margin="10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Image Grid.Column="0"
+                   Margin="0,0,10,0"
+                   Source="pack://application:,,,/DL.AccountChecker.Suite.WPF;component/Content/Images/Category_s.png" />
+            <StackPanel Grid.Column="1"
+                        Orientation="Vertical" VerticalAlignment="Center">
+                <TextBlock FontSize="14" Foreground="{StaticResource CategoryBoxTextColor}"
+                           Text="{Binding Account.BankName}" />
+                <Separator Style="{StaticResource ItemSeparator}" />
+                <TextBlock Foreground="{StaticResource GreyColor}">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Bank Code: {0}, Card Number: {1}">
+                        <Binding Path="Account.BankCode"></Binding>
+                        <Binding Path="Account.CardNumber"></Binding>
+                    </MultiBinding>
+                </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

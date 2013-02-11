@@ -1,0 +1,12 @@
+create table [dbo].[TRANSACTION_HISTORY]
+(
+	TRANSACTION_ID bigint not null,
+	UNIQUE_ID nvarchar(100) null,
+	ACCOUNT_ID bigint not null,
+	[DATE] int not null,
+	[DESCRIPTION] nvarchar(max) not null,
+	AMOUNT decimal(12,2) not null,
+	[STATUS] nvarchar(20) not null,
+	MODIFIED datetime not null
+)
+go

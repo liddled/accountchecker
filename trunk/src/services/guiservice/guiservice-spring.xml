@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd">
+
+  <object name="appConfigPropertyHolder" type="Spring.Objects.Factory.Config.PropertyPlaceholderConfigurer, Spring.Core">
+    <property name="configSections" value="appSettings" />
+  </object>
+
+  <import resource="SpringXml\cache.xml" />
+  <import resource="SpringXml\framework.xml" />
+  <import resource="SpringXml\messaging.xml" />
+  <import resource="SpringXml\repository.sql.xml" />
+  
+  <import resource="SpringXml\account.xml" />
+  <import resource="SpringXml\category.xml" />
+  <import resource="SpringXml\transaction.xml" />
+
+  <object id="cacheSync" type="DL.AccountChecker.BusinessLogic.CacheSync, DL.AccountChecker.BusinessLogic">
+    <constructor-arg name="messageSubscriber" ref="cacheSyncSubscriber" />
+  </object>
+
+  <object id="cacheSyncSubscriber" type="DL.Framework.Messaging.RabbitMqSubscriber, DL.Framework.Messaging">
+    <constructor-arg name="connection" ref="rabbitMqConnection" />
+    <constructor-arg name="consumer" ref="cacheSyncConsumer" />
+    <constructor-arg name="exchange" value="accountchecker" />
+    <constructor-arg name="routingKey" value="accountchecker.domain.*" />
+    <property name="Queue" value="accountchecker.domain" />
+  </object>
+
+  <object id="cacheSyncConsumer" type="DL.Framework.Messaging.RabbitMqConsumer, DL.Framework.Messaging">
+    <constructor-arg name="messageProcessor" ref="cacheSyncProcessor" />
+  </object>
+
+  <object id="cacheSyncProcessor" type="DL.AccountChecker.BusinessLogic.CacheSyncProcessor, DL.AccountChecker.BusinessLogic">
+    <constructor-arg name="cachedTypes" ref="cachedTypes" />
+    <constructor-arg name="transactionManagerFactory" ref="transactionManagerFactory" />
+  </object>
+
+</objects>

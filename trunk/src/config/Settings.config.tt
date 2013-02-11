@@ -1,0 +1,25 @@
+﻿<#@ include file="Common.template.tt" #>
+<#
+	
+	//DB
+	Set(DEFAULT, "connectionString", "Data Source=localhost;Initial Catalog=AccountChecker;Integrated Security=True;Connection Timeout=3600");
+
+	//Excel Service
+	Set(DEFAULT, "excelServiceName", "AccountCheckerExcelService");
+	Set(DEFAULT, "excelServer", "localhost");
+	Set(DEFAULT, "excelServerPort", "40103");
+
+	//GUI Service
+	Set(DEFAULT, "guiServiceName", "AccountCheckerGUIService");
+	Set(DEFAULT, "guiServiceEndPointName", "AccountCheckerGuiServiceEndPoint");
+	Set(DEFAULT, "guiServiceHostname", "localhost");
+	Set(DEFAULT, "guiServicePort", "40101");
+	Set(DEFAULT, "guiServiceHttpPort", "30101");
+	Set(DEFAULT, "guiSubscriptionServiceEndPointName", "AccountCheckerSubscriptionServiceEndPoint");
+	Set(DEFAULT, "guiSubscriptionServicePort", "40102");
+	Set(DEFAULT, "guiSubscriptionServiceHttpPort", "30102");
+
+	//Integration Service
+	Set(DEFAULT, "integrationServiceName", "AccountCheckerIntegrationService");
+	
+#>

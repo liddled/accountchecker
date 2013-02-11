@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<objects xmlns="http://www.springframework.net"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd">
+
+  <description>Definition of objects to be registered via Spring.</description>
+
+  <object id="guiService" autowire="autodetect" lazy-init="true" type="DL.Framework.Services.ServiceProxy&lt;DL.AccountChecker.Framework.IGuiService>, DL.Framework.Services">
+    <constructor-arg name="endPoint" value="GuiServiceEndPoint"/>
+  </object>
+
+  <object id="ExcelController" autowire="autodetect" type="DL.AccountChecker.BusinessLogic.ExcelController, DL.AccountChecker.BusinessLogic">
+    <constructor-arg name="excelNamespace" ref="excelNamespace"/>
+  </object>
+
+  <object id="excelNamespace" type="DL.Framework.Common.ExcelNamespace, DL.Framework.Common">
+    <property name="Name" value="Namespace"/>
+    <property name="Children">
+      <list element-type="DL.Framework.Common.IExcelNode">
+        <ref object="excelAccountNamespace" />
+      </list>
+    </property>
+  </object>
+
+  <object id="excelAccountNamespace" type="DL.Framework.Common.ExcelNamespace, DL.Framework.Common">
+    <property name="Name" value="Accounts"/>
+    <property name="Children">
+      <list element-type="DL.Framework.Common.IExcelNode">
+        <object type="DL.Framework.Common.ExcelNode, DL.Framework.Common">
+          <property name="Name" value="Get Accounts"/>
+          <property name="MethodName" value="GetAccounts"/>
+          <!--<property name="ClassObject" ref="guiService"/>-->
+        </object>
+        <object type="DL.Framework.Common.ExcelNode, DL.Framework.Common">
+          <property name="Name" value="Get Account"/>
+          <property name="MethodName" value="GetAccount"/>
+          <!--<property name="ClassObject" ref="guiService"/>-->
+        </object>
+        <object type="DL.Framework.Common.ExcelNode, DL.Framework.Common">
+          <property name="Name" value="Get Account By Id"/>
+          <property name="MethodName" value="GetAccountById"/>
+          <!--<property name="ClassObject" ref="guiService"/>-->
+        </object>
+      </list>
+    </property>
+  </object>
+  
+</objects>

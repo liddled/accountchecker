@@ -1,0 +1,25 @@
+create table [dbo].[TRANSACTION_INFO]
+(
+	TRANSACTION_ID bigint not null,
+	EXCLUDED bit null,
+	MODIFIED datetime not null
+)
+go
+
+alter table [dbo].[TRANSACTION_INFO]
+	add constraint PK_TRANSACTION_INFO primary key nonclustered
+	(
+		TRANSACTION_ID
+	)
+go
+
+alter table [dbo].[TRANSACTION_INFO]
+	add constraint FK_TRANSACTION_INFO_TRANSACTION foreign key
+	(
+		TRANSACTION_ID
+	)
+	references [dbo].[TRANSACTION]
+	(
+		TRANSACTION_ID
+	)
+go

@@ -1,0 +1,151 @@
+<#@ include file="..\..\config\Settings.config.tt" #>
+<#
+
+	Set(DEFAULT, "log4netConfigFile", "~/guiservice-log4net.xml");
+	Set(DEFAULT, "springConfigFile", "~/guiservice-spring.xml");
+	
+	GenerateContent(LOCAL);
+	SaveOutput("App.config");
+
+#>
+<#+ void GenerateContent(string env) { #>
+<!-- ================================================================ -->
+<!-- = IMPORTANT: This is an auto-generated file. Please do not     = -->
+<!-- = change this file manually. If changes are required, please   = -->
+<!-- = change App.Config.tt (template file) instead.                = -->
+<!-- ================================================================ -->
+<configuration>
+	<configSections>
+		<sectionGroup name="common">
+			<section name="logging" type="Common.Logging.ConfigurationSectionHandler, Common.Logging" />
+		</sectionGroup>
+		<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+		<sectionGroup name="spring">
+			<section name="context" type="Spring.Context.Support.ContextHandler, Spring.Core" />
+			<section name="objects" type="Spring.Context.Support.DefaultSectionHandler, Spring.Core" />
+		</sectionGroup>
+	</configSections>
+	
+	<appSettings>
+		<add key="Component" value="<#= Get(env, "guiServiceName") #>"/>
+		<add key="ConnectionString" value="<#= Get(env, "connectionString") #>" />
+	</appSettings>
+	
+	<common>
+		<logging>
+			<factoryAdapter type="Common.Logging.Log4Net.Log4NetLoggerFactoryAdapter, Common.Logging.Log4Net">
+				<arg key="configType" value="FILE-WATCH" />
+				<arg key="configFile" value="<#= Get(env, "log4netConfigFile") #>" />
+			</factoryAdapter>
+		</logging>
+	</common>
+	
+	<spring>
+		<context>
+			<resource uri="<#= Get(env, "springConfigFile") #>" />
+		</context>
+	</spring>
+	
+	<system.diagnostics>
+		<sources>
+			<source name="System.ServiceModel" switchValue="Information, ActivityTracing" propagateActivity="true">
+				<listeners>
+					<add name="traceListener" type="System.Diagnostics.XmlWriterTraceListener" initializeData="..\..\..\..\..\..\..\logs\accountchecker\services\guiservice\guiservice.svclog" />
+				</listeners>
+			</source>
+		</sources>
+	</system.diagnostics>
+	
+	<system.serviceModel>
+		<services>
+			<service name="DL.AccountChecker.Services.GuiService.GuiService" behaviorConfiguration="serviceBehaviourMex">
+				<host>
+					<baseAddresses>
+						<add baseAddress="http://<#= Get(env, "guiServiceHostname") #>:<#= Get(env, "guiServiceHttpPort") #>/AccountCheckerGuiService"/>
+					</baseAddresses>
+				</host>
+				<endpoint address="net.tcp://<#= Get(env, "guiServiceHostname") #>:<#= Get(env, "guiServicePort") #>/AccountCheckerGuiService"
+						  contract="DL.AccountChecker.Framework.IGuiService"
+						  binding="netTcpBinding"
+						  bindingConfiguration="binaryTcpBinding"
+						  behaviorConfiguration="wsClientBehavior"/>
+			</service>
+			<service name="DL.AccountChecker.Services.GuiService.SubscriptionService" behaviorConfiguration="serviceBehaviourMex">
+				<host>
+					<baseAddresses>
+						<add baseAddress="http://<#= Get(env, "guiServiceHostname") #>:<#= Get(env, "guiSubscriptionServiceHttpPort") #>/AccountCheckerSubscriptionService"/>
+					</baseAddresses>
+				</host>
+				<endpoint address="net.tcp://<#= Get(env, "guiServiceHostname") #>:<#= Get(env, "guiSubscriptionServicePort") #>/AccountCheckerSubscriptionService"
+						  contract="DL.AccountChecker.Framework.ISubscriptionService"
+						  binding="netTcpBinding"
+						  bindingConfiguration="binaryTcpBinding"
+						  behaviorConfiguration="wsClientBehavior"/>
+				<endpoint contract="IMetadataExchange" binding="mexHttpBinding" address="mex"/>
+			</service>
+		</services>
+		<behaviors>
+			<endpointBehaviors>
+				<behavior name="wsClientBehavior">
+					<dataContractSerializer maxItemsInObjectGraph="100000000"/>
+					<!--<endpointDiscovery>
+						<scopes>
+							<add scope = "net.tcp://QPServer"/>
+						</scopes>
+					</endpointDiscovery>-->
+				</behavior>
+			</endpointBehaviors>
+			<serviceBehaviors>
+				<behavior name="serviceConfiguration">
+					<serviceMetadata httpGetEnabled="false" />
+				</behavior>
+				<behavior name="serviceBehaviourMex">
+					<serviceDebug includeExceptionDetailInFaults="True"/>
+					<serviceThrottling maxConcurrentCalls="20" maxConcurrentSessions="1000" maxConcurrentInstances="1000"/>
+					<serviceMetadata httpGetEnabled="true" httpGetUrl="mex"/>
+				</behavior>
+			</serviceBehaviors>
+		</behaviors>
+		<bindings>
+			<netTcpBinding>
+				<binding name="binaryTcpBinding" receiveTimeout="23:00:00" maxReceivedMessageSize="2147483647" sendTimeout="00:10:10" maxConnections="1000">
+					<reliableSession inactivityTimeout="23:00:00"/>
+					<readerQuotas maxDepth="2147483647" maxStringContentLength="2147483647" maxArrayLength="2147483647" maxBytesPerRead="2147483647" maxNameTableCharCount="2147483647"/>
+					<security mode="Transport">
+						<transport clientCredentialType="Windows" protectionLevel="None"/>
+					</security>
+				</binding>
+			</netTcpBinding>
+			<customBinding>
+				<binding name="binaryHttpBinding" receiveTimeout="4.23:00:00.000" sendTimeout="00:05:00">
+				  <reliableSession inactivityTimeout="23:00:00" maxPendingChannels="128" maxRetryCount="4"/>
+				  <binaryMessageEncoding>
+					<readerQuotas maxDepth="2147483647"
+								  maxStringContentLength="2147483647"
+								  maxArrayLength="2147483647"
+								  maxBytesPerRead="2147483647"
+								  maxNameTableCharCount="2147483647"/>
+				  </binaryMessageEncoding>
+				  <httpTransport hostNameComparisonMode="StrongWildcard"
+								 manualAddressing="False"
+								 maxReceivedMessageSize="100000000"
+								 authenticationScheme="Ntlm"
+								 bypassProxyOnLocal="False"
+								 realm=""
+								 useDefaultWebProxy="True"/>
+				</binding>
+			</customBinding>
+		</bindings>
+	</system.serviceModel>
+	
+	<runtime>
+		<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+			<dependentAssembly>
+				<assemblyIdentity name="Common.Logging" publicKeyToken="AF08829B84F0328E" />
+				<bindingRedirect oldVersion="1.2.0.0" newVersion="2.0.0.0"/>
+			</dependentAssembly>
+		</assemblyBinding>
+	</runtime>
+</configuration>
+
+<#+ } #>

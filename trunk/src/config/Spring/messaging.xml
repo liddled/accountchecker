@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<objects xmlns="http://www.springframework.net"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd">
+
+  <description>Definition of objects to be registered via Spring.</description>
+
+  <object id="rabbitMqConnection" type="DL.Framework.Messaging.RabbitMqConnection, DL.Framework.Messaging">
+    <constructor-arg name="hostName" value="localhost" />
+    <constructor-arg name="userName" value="guest" />
+    <constructor-arg name="password" value="guest" />
+    <constructor-arg name="virtualHost" value="/" />
+  </object>
+
+  <object id="rabbitMqPublisher" type="DL.Framework.Messaging.RabbitMqPublisher, DL.Framework.Messaging">
+    <constructor-arg name="connection" ref="rabbitMqConnection" />
+    <constructor-arg name="exchange" value="accountchecker" />
+  </object>
+
+</objects>

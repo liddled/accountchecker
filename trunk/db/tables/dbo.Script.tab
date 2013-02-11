@@ -1,0 +1,14 @@
+create table [dbo].[SCRIPT]
+(
+	SCRIPT_CODE nvarchar(20) not null,
+	[DESCRIPTION] nvarchar(250) not null,
+	MODIFIED datetime not null
+)
+go
+
+alter table [dbo].[SCRIPT]
+	add constraint PK_SCRIPT primary key nonclustered
+	(
+		SCRIPT_CODE
+	)
+go
